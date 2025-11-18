@@ -3,12 +3,19 @@ version = "1.0.0"
 priority = 4
 
 [[patches]]
+# this is very awesome jank
+[patches.copy]
+target = '''=[SMODS cardpronouns "badge.lua"]'''
+position = "append"
+sources = [
+    "lovely/pronounbadges.lua"
+]
+
+[[patches]]
 [patches.pattern]
 target = '''=[SMODS cardpronouns "badge.lua"]'''
-pattern = '''align = "cm",'''
-position = "after"
-payload = '''
-ecatto_american = badge.key == "ecatto_eaglenoise_any",
-'''
-match_indent = true
-times = 1
+pattern = '''end
+AAAAAAAAAAAAAAAAAAAAAAA'''
+position = "at"
+payload = ''
+match_indent = false
