@@ -248,6 +248,16 @@ if CardPronouns then
 	elementcattos.usa_flag = love.graphics.newImage(NFS.read('data', SMODS.current_mod.path .. "assets/gfx/usa.png"))
 end
 
+topuplib.addFontOption("Century Schoolbook", "lua/fonts/centuryschoolbook")
+
+local meme = topuplib.createFallbackPoolItem
+topuplib.createFallbackPoolItem = function(type, pool)
+	if type == "Joker" and G.GAME.starting_params.ecattos_deck then
+		
+	end
+	return meme(type, pool)
+end
+
 for i, v in ipairs(rq) do
 	local a = assert(SMODS.load_file("lua/"..v..".lua"))()
 end
