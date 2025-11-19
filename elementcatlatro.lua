@@ -40,6 +40,9 @@ elementcattos = {
 		if CardPronouns.badge_types[n] then return n end
 		return "ecatto_" .. n
 	end,
+	fallbacks = {
+		"j_ecattos_element1", "j_ecattos_element2", "j_ecattos_element6", "j_ecattos_element8"
+	},
 	--Compounds
 	compounds = {},
 	formatFormula = function(formula, method)
@@ -253,11 +256,39 @@ topuplib.addFontOption("Century Schoolbook", "lua/fonts/centuryschoolbook")
 local meme = topuplib.createFallbackPoolItem
 topuplib.createFallbackPoolItem = function(type, pool)
 	if type == "Joker" and G.GAME.starting_params.ecattos_deck then
-		
+		return elementcattos.fallbacks[math.random(#elementcattos.fallbacks)]
 	end
 	return meme(type, pool)
 end
 
+SMODS.Sound {
+	--This song is a WIP
+	key = "music_ecattos",
+	path = "balatro-elementcatto.ogg",
+	pitch = 1,
+	select_music_track = function(self)
+		return G.OVERLAY_MENU and topuplib.music == "ecattos"
+	end
+}
+
 for i, v in ipairs(rq) do
 	local a = assert(SMODS.load_file("lua/"..v..".lua"))()
+end
+
+elementcattos.booster_pools = {
+	[1] = {},
+	[2] = {},
+	[3] = {},
+	[4] = {},
+	tool = {}
+}
+
+for k,v in pairs(SMODS.Centers) do
+	if v.original_mod and v.original_mod.id == SMODS.current_mod.id then
+		if v.set == "Joker" then
+			table.insert(elementcattos.booster_pools[v.rarity], v.key)
+		elseif v.set == "Tarot" then
+			table.insert(elementcattos.booster_pools.tool, v.key)
+		end
+	end
 end

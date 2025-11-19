@@ -77,4 +77,5 @@ elementcattos.ui_compound_creator = function(self, card)
 	G.FUNCS.overlay_menu{
 		definition = UIBox_ecatto_compound_creator(card),
 	}
+	topuplib.music = "ecattos"
 end
