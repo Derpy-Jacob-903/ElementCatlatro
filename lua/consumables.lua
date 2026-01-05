@@ -56,13 +56,13 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 		local fuse = elementcattos.getFusion()
 		if type(fuse) == "table" then
 			if fuse[1] == "naium" then
-				fuse = "Negative Edition"
+				fuse = localize("ecattos_fusion_negative")
 			end
 		elseif fuse then
 			fuse = topuplib.nameFromKey(fuse)
 		end
 		return {
-			vars = {fuse or "None"}
+			vars = {fuse or localize("ecattos_fusion_none")}
 		}
 	end,
 	can_use = elementcattos.getFusion,
@@ -99,7 +99,7 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		local a, b = elementcattos.getFission()
 		return {
-			vars = a and {topuplib.nameFromKey(a), topuplib.nameFromKey(b)} or {"None", "None"}
+			vars = a and {topuplib.nameFromKey(a), topuplib.nameFromKey(b)} or {localize("ecattos_fission_none"), localize("ecattos_fission_none")}
 		}
 	end,
 	can_use = function()

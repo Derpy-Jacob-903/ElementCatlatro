@@ -1,4 +1,18 @@
 return {
+	misc = {
+		dictionary = {
+			ecattos_compoundcreator_tocreate = "Compound to create",
+			ecattos_compoundcreator_confirm = "Confirm",
+			k_booster_group_p_ecattos_element_common = "Elements Pack",
+			k_booster_group_p_ecattos_element_uncommon = "Elements Pack",
+			k_booster_group_p_ecattos_element_rare = "Elements Pack",
+			k_booster_group_p_ecattos_element_tools = "Tools Pack",
+			ecattos_fusion_negative = "Negative Edition",
+			ecattos_fusion_none = "None",
+			ecattos_fission_none = "None",
+			ecattos_recipe_name_stone_cards = "6 Stone Cards"
+		}
+	},
 	descriptions = {
 		Joker = {
 			--Elements
@@ -262,7 +276,7 @@ return {
 			},
 			c_ecattos_eraser = {
 				name = "Matter Eraser",
-				text = {
+				text = topuplib.asub {
 					"Destroys {_A:attention:1} selected",
 					"Element Catto",
 					"{C:inactive}(Bypasses Eternal)"
@@ -273,7 +287,7 @@ return {
 				text = topuplib.asub {
 					"Select {_A:attention:1} Compound to form",
 					"using Elements you have",
-					"{C:inactive}(First Edition is kept){}"
+					"{C:inactive}(First Edition is kept)"
 				}
 			},
 			c_ecattos_tweezers = {
@@ -292,6 +306,48 @@ return {
 					"Removes an Electron from",
 					"{_A:attention:1} selected Element Catto",
 					"{_A:musthaveroom}"
+				}
+			}
+		},
+		Other = {
+			p_ecattos_element_common = {
+				name = "Common Elements Pack",
+				text = topuplib.asub {
+					"Select {C:attention}2{} of {C:attention}5{} {_A:common}",
+					"Element Cattos"
+				}
+			},
+			p_ecattos_element_uncommon = {
+				name = "Uncommon Elements Pack",
+				text = topuplib.asub {
+					"Select {C:attention}2{} of {C:attention}5{} {_A:uncommon}",
+					"Element Cattos"
+				}
+			},
+			p_ecattos_element_rare = {
+				name = "Common Elements Pack",
+				text = topuplib.asub {
+					"Select {C:attention}1{} of {C:attention}3{} {_A:rare}",
+					"Element Cattos"
+				}
+			},
+			p_ecattos_element_tools = {
+				name = "Tools Pack",
+				text = {
+					"Select {C:attention}1{} of {C:attention}4{} {C:tarot}Tools{}",
+					"to use immediately"
+				}
+			}
+		},
+		Back = {
+			b_ecattos_elements = {
+				name = "Element Cattos Deck",
+				text = topuplib.asub {
+					"Only Jokers from {C:attention}Element",
+					"{C:attention}Catlatro{} may appear",
+					"{C:attention}+24{} Joker slots",
+					"Start with additional {_A:money:8}",
+					"and {C:attention}Overstock Plus{}"
 				}
 			}
 		}

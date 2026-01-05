@@ -1,7 +1,7 @@
 elementcattos.compounds._stonecards = {
 	{"Ca", {"H", 2}, "C", {"O", 3}},
 	{
-		name = "6 Stone Cards",
+		name = localize("ecattos_recipe_name_stone_cards"),
 		func = function(edition, inputs)
 			--1 card is guaranteed to be no edition.
 			--2 other card is 66% chance to be foil or holo.

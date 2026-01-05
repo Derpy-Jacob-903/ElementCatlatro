@@ -9,16 +9,6 @@ SMODS.Atlas({
 
 SMODS.Back({
 	key = "elements",
-	loc_txt = {
-		name = "Element Cattos Deck",
-		text = {
-			"Only Jokers from Element",
-			"Catlatro may appear",
-			"+24 Joker slots",
-			"Start with additional $8",
-			"and Overstock Plus"
-		}
-	},
 	atlas = "decks",
 	pos = {x = 0, y = 0},
 	config = {
