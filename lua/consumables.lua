@@ -33,6 +33,7 @@ end
 elementcattos.getFission = function()
 	if not G.jokers or #G.jokers.highlighted ~= 1 then return end
 	local a = elementcattos.validTransformElement(G.jokers.highlighted[1])
+	if not a then return end
 	local r1, r2 = math.floor(a * 0.5), math.ceil(a * 0.5)
 	if a and elementcattos.atomicnumber[r1] and elementcattos.atomicnumber[r2] then
 		return "j_ecattos_element" .. tostring(r1), "j_ecattos_element" .. tostring(r2)
