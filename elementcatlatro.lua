@@ -11,7 +11,7 @@ elementcattos = {
 		--TODO: localize these currently english-only strings
 		if d.anum then xline[1] = "Atomic number: " .. tostring(d.anum) end
 		if d.sym then xline[#xline + 1] = "Symbol: " .. d.sym end
-		if d.compound then xline[#xline + 1] = "Formula: " .. elementcattos.formatFormula(elementcattos.compounds[d.compound][1]) end
+		if d.compound then xline[#xline + 1] = "Formula: " .. (elementcattos.compounds[d.compound] and elementcattos.formatFormula(elementcattos.compounds[d.compound][1]) or ("INVALID ("..tostring(d.compound)..")")) end
 		if #xline ~= 0 then
 			d.text = d.text or {}
 			d.text[#d.text + 1] = "{C:inactive}" .. table.concat(xline, ", ")
@@ -277,6 +277,67 @@ topuplib.createFallbackPoolItem = function(type, pool)
 		return elementcattos.fallbacks[math.random(#elementcattos.fallbacks)]
 	end
 	return meme(type, pool)
+end
+
+local oldfunc = Game.main_menu
+Game.main_menu = function(change_context)
+	local ret = oldfunc(change_context)
+	
+	elementcattos.title_cardarea = CardArea(
+        0, 0,
+        G.CARD_W * 7,G.CARD_H,
+        {card_limit = 4, type = 'title', lr_padding = 1})
+	elementcattos.title_cardarea:set_alignment({
+		major = G.title_top,
+		bond = "Strong",
+		type = "cm",
+		offset = {x=0, y=3.5}
+	})
+	local candidates = {}
+	while #candidates < 118 do
+		candidates[#candidates+1] = #candidates+1
+	end
+	-- adds a Cryptid spectral to the main menu
+	while #elementcattos.title_cardarea.cards < 5 do
+		local n = table.remove(candidates, math.random(#candidates))
+		local newcard = Card(
+			G.title_top.T.x,
+			G.title_top.T.y,
+			G.CARD_W,
+			G.CARD_H,
+			G.P_CARDS.empty,
+			G.P_CENTERS["j_ecattos_element"..n],
+			{ bypass_discovery_center = true }
+		)
+		-- recenter the title
+		elementcattos.title_cardarea:emplace(newcard)
+		-- make the card look the same way as the title screen Ace of Spades
+		--newcard.T.w = newcard.T.w * 1.1 * 1.2
+		--newcard.T.h = newcard.T.h * 1.1 * 1.2
+		newcard.no_ui = true
+		newcard.states.visible = false
+		local delay = 3 - (#elementcattos.title_cardarea.cards * 0.3)
+
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = delay,
+			blockable = false,
+			blocking = false,
+			func = function()
+				newcard.states.visible = true
+				newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, false, 2)
+				return true
+			end,
+		}))
+	end
+	
+    elementcattos.title_cardarea:sort('order')
+    elementcattos.title_cardarea:set_ranks()
+    elementcattos.title_cardarea:align_cards()
+    elementcattos.title_cardarea:hard_set_cards()
+	elementcattos.title_cardarea:hard_set_VT()
+
+	return ret
 end
 
 SMODS.Sound {
