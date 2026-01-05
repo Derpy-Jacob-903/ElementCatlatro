@@ -49,16 +49,6 @@ SMODS.Atlas({
 table.insert(elementcattos.tools, SMODS.Consumable {
 	key = "fusion",
 	set = "Tarot",
-	loc_txt = {
-		name = "Fusion Reactor",
-		text = {
-			"Combine 2 selected Element Cattos",
-			"into one with an atomic number",
-			"equal to the sum of the inputs",
-			topuplib.formatText({{"(First Edition is kept)", "inactive"}}),
-			topuplib.formatText({{"(Will create: #1#)", "inactive"}})
-		}
-	},
 	atlas = "tools",
 	pos = {x = 0, y = 0},
 	loc_vars = function(self, info_queue, card)
@@ -68,7 +58,7 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 				fuse = "Negative Edition"
 			end
 		elseif fuse then
-			fuse = SMODS.Centers[fuse].loc_txt.name
+			fuse = topuplib.nameFromKey(fuse)
 		end
 		return {
 			vars = {fuse or "None"}
@@ -103,22 +93,12 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 table.insert(elementcattos.tools, SMODS.Consumable {
 	key = "fission",
 	set = "Tarot",
-	loc_txt = {
-		name = "Fission Hammer",
-		text = {
-			"Split 1 selected Element Catto",
-			"into two based on it's atomic number",
-			topuplib.formatText({{"(Must have room)", "inactive"}}),
-			topuplib.formatText({{"(Edition is given to the first output)", "inactive"}}),
-			topuplib.formatText({{"(Will create: #1# and #2#)", "inactive"}})
-		}
-	},
 	atlas = "tools",
 	pos = {x = 1, y = 0},
 	loc_vars = function(self, info_queue, card)
 		local a, b = elementcattos.getFission()
 		return {
-			vars = a and {SMODS.Centers[a].loc_txt.name, SMODS.Centers[b].loc_txt.name} or {"None", "None"}
+			vars = a and {topuplib.nameFromKey(a), topuplib.nameFromKey(b)} or {"None", "None"}
 		}
 	end,
 	can_use = function()
@@ -143,39 +123,45 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 }.key)
 
 --Todo: implement the rest of the consumables
---[[table.insert(elementcattos.tools, SMODS.Consumable {
-	key = "weakray",
-	set = "Tarot",
-	loc_txt = {
-		name = "Weak Ray",
-		text = {
-			topuplib.txnyi,
-			"Accelerates 1 selected",
-			"radioactive Element Catto's decay"
-		}
-	},
-	atlas = "tools",
-	pos = {x = 4, y = 0},
-	can_use = function()
-		--return #G.jokers.highlighted == 1 and elementcattos.isRadioactive(G.jokers.highlighted[1])
-		return false
-	end,
-	use = function() end
-}.key)]]
+if topuplib.debug then
+	table.insert(elementcattos.tools, SMODS.Consumable {
+		key = "weakray",
+		set = "Tarot",
+		atlas = "tools",
+		pos = {x = 4, y = 0},
+		can_use = function()
+			--return #G.jokers.highlighted == 1 and elementcattos.isRadioactive(G.jokers.highlighted[1])
+			return false
+		end,
+		use = function() end
+	}.key)
+	
+	table.insert(elementcattos.tools, SMODS.Consumable {
+		key = "tweezers",
+		set = "Tarot",
+		atlas = "tools",
+		pos = {x = 2, y = 0},
+		can_use = function()
+			return false
+		end,
+		use = function() end
+	}.key)
+	
+	table.insert(elementcattos.tools, SMODS.Consumable {
+		key = "electromagnet",
+		set = "Tarot",
+		atlas = "tools",
+		pos = {x = 3, y = 0},
+		can_use = function()
+			return false
+		end,
+		use = function() end
+	}.key)
+end
 
 table.insert(elementcattos.tools, SMODS.Consumable {
 	key = "duplicator",
 	set = "Tarot",
-	loc_txt = {
-		name = "Matter Duplicator",
-		text = {
-			"Creates a copy of 1",
-			"selected Element Catto",
-			"Common elements are",
-			"copied twice",
-			topuplib.formatText({{"(Must have room)", "inactive"}})
-		}
-	},
 	atlas = "tools",
 	pos = {x = 5, y = 0},
 	can_use = function()
@@ -197,14 +183,6 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 table.insert(elementcattos.tools, SMODS.Consumable {
 	key = "eraser",
 	set = "Tarot",
-	loc_txt = {
-		name = "Matter Eraser",
-		text = {
-			"Destroys 1 selected",
-			"Element Catto",
-			topuplib.formatText({{"(Bypasses Eternal)", "inactive"}})
-		}
-	},
 	atlas = "tools",
 	pos = {x = 6, y = 0},
 	can_use = function()
@@ -218,14 +196,6 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 table.insert(elementcattos.tools, SMODS.Consumable {
 	key = "compoundcreator",
 	set = "Tarot",
-	loc_txt = {
-		name = "Compound Creator",
-		text = {
-			"Select 1 compound to form",
-			"using elements you have",
-			topuplib.formatText({{"(First Edition is kept)", "inactive"}})
-		}
-	},
 	atlas = "tools",
 	pos = {x = 7, y = 0},
 	config = { extra = { ready = true } },
