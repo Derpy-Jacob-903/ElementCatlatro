@@ -1,0 +1,1 @@
+--Dont register unique Jokers for isotopes, if we do, that would result in probably infinite registered Jokers

@@ -2,10 +2,6 @@ local compounds = {
 	{
 		id = "water",
 		name = "Water",
-		desc = {
-			"All played cards",
-			"count in scoring"
-		},
 		pronouns = "she_her",
 		formula = {{"H", 2}, "O"},
 	},
@@ -20,26 +16,25 @@ local compounds = {
 	{
 		id = "oobleck",
 		name = "Oobleck",
-		desc = {
-			topuplib.formatText({{"X4", "xmult"}, {" Mult if played hand"}}),
-			topuplib.formatText({{"has at most "}, {"25", "mult"}, {" base Mult,"}}),
-			topuplib.formatText({{"otherwise "}, {"X0.5", "xmult"}, {" Mult"}})
-		},
 		pronouns = "she_her",
 		formula = {{"starch"}, "_+", {"water"}},
 		rarity = 3,
-		cost = 24
+		cost = 24,
+		config = {extra = {big_xmult = 4, mult_threshold = 25, small_xmult = 0.5}},
+		loc_vars = function(self, info_queue, card)
+			return { vars = { card.ability.extra.big_xmult, card.ability.extra.small_xmult, card.ability.extra.mult_threshold } }
+		end
 	},
 	{
 		id = "silica",
 		name = "Silica",
-		desc = {
-			topuplib.formatText({{"+2", "mult"}, {" Mult per"}}),
-			topuplib.formatText({{"scored Stone card"}})
-		},
 		pronouns = "unknown",
 		formula = {"Si", {"O", 2}},
-		cost = 3
+		cost = 3,
+		config = {extra = {mult = 2}},
+		loc_vars = function(self, info_queue, card)
+			return { vars = { card.ability.extra.mult } }
+		end
 	}
 }
 
@@ -75,7 +70,9 @@ for k,v in ipairs(compounds) do
 		compound_formula = v.formula,
 		element_symbol = v.id,
 		rarity = v.rarity,
-		in_pool = inpool
+		in_pool = inpool,
+		config = v.config,
+		loc_vars = v.loc_vars
 	})
 	elementcattos.compounds[v.id] = {v.formula, j.key}
 end

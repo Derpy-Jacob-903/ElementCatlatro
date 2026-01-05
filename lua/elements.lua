@@ -20,46 +20,39 @@
 
 local elements = {
 	--Atomic number, Symbol, Name, Pronouns, Text, Calculate
-	{0, "Mu", "Muonium", "hse_ehr", {
-		topuplib.formatText({{"+?", "tarot"}, {" ???"}})
-	}, rarity = 3},
+	{0, "Mu", "Muonium", "hse_ehr", nil, rarity = 3},
 	
-	{1, "H", "Hydrogen", "she_her", {
-		topuplib.formatText({{"+25", "chips"}, {" Chips"}})
-	}, rarity = 1},
+	{1, "H", "Hydrogen", "she_her", nil, rarity = 1, config = { extra = {chips = 25} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips } }
+    end},
 	
-	{2, "He", "Helium", "he_him", {
-		topuplib.formatText({{"+2.5", "mult"}, {" Mult"}})
-	}, rarity = 1},
+	{2, "He", "Helium", "he_him", nil, rarity = 1, config = { extra = {mult = 2.5} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult } }
+    end},
 	
-	{3, "Li", "Lithium", "he_him", {
-		topuplib.formatText({{"Gains "},{"Chips", "chips"}, {" equal to"}}),
-		topuplib.formatText({{"1/12th of scored "},{"Mult", "mult"}}),
-		topuplib.formatText({{"(Currently ", "inactive"},{"+#1#", "chips"},{" Chips)", "inactive"}})
-	}, rarity = 2},
+	{3, "Li", "Lithium", "he_him", nil, rarity = 2, config = { extra = {chips = 0} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips } }
+    end},
 	
 	{4, "Be", "Beryllium"},
 	
 	{5, "B", "Boron", "he_him", rarity = 3},
 	
-	{6, "C", "Carbon", "he_him", {
-	
-		topuplib.formatText({{"X1.15", "xchips"}, {" Chips per scored"}}),
-		topuplib.formatText({{"Spade", "spades"}, {" or "}, {"Club", "clubs"}})
-	}, rarity = 1},
+	{6, "C", "Carbon", "he_him", rarity = 1, config = { extra = {xchips = 1.15} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xchips } }
+    end},
 	
 	{7, "N", "Nitrogen", rarity = 1},
 	
-	{8, "O", "Oxygen", "she_her", {
-		topuplib.formatText({{"+10", "chips"}, {" Chips or "}, {"+0.5", "mult"}, {" Mult"}}),
-		topuplib.formatText({{"per scored card"}})
-	}, rarity = 1},
+	{8, "O", "Oxygen", "she_her", rarity = 1, config = { extra = {chips = 10, mult = 0.5} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
+    end},
 	
 	{9, "F", "Fluorine", rarity = 2},
 	
-	{10, "Ne", "Neon", "she_her", {
-		topuplib.formatText({{"X1.5", "xmult"}, {" base Mult"}})
-	}, rarity = 1},
+	{10, "Ne", "Neon", "she_her", rarity = 1, config = { extra = {xmult = 1.5} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult } }
+    end},
 	
 	{11, "Na", "Sodium", "he_him", rarity = 1},
 	
@@ -67,10 +60,9 @@ local elements = {
 	
 	{13, "Al", "Aluminium", "he_him", rarity = 1},
 	
-	{14, "Si", "Silicon", "he_him", {
-		"Booster Packs have",
-		"1 more card"
-	}, rarity = 1},
+	{14, "Si", "Silicon", "he_him", rarity = 1, config = { extra = {more = 1} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.more } }
+    end},
 	
 	{15, "P", "Phosphorus", "he_him", rarity = 1},
 	
@@ -94,9 +86,7 @@ local elements = {
 	
 	{25, "Mn", "Manganese", "he_him", rarity = 1},
 	
-	{26, "Fe", "Iron", "he_him", {
-		
-	}, rarity = 1},
+	{26, "Fe", "Iron", "he_him", nil, rarity = 1},
 	
 	{27, "Co", "Cobalt", "he_him", rarity = 1},
 	
@@ -234,10 +224,9 @@ local elements = {
 	
 	{94, "Pu", "Plutonium", "he_any"},
 	
-	{95, "Am", "Americium", "ecatto_eaglenoise_any", {
-		topuplib.formatText({{"X3", "xmult"}, {" Mult if scored hand contains"}}),
-		topuplib.formatText({{"Clubs", "clubs"}, {", "}, {"Hearts", "hearts"}, {", and no other suits"}})
-	}},
+	{95, "Am", "Americium", "ecatto_eaglenoise_any", nil, config = { extra = {xmult = 3} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult } }
+    end},
 	
 	{96, "Cm", "Curium"},
 	
@@ -283,10 +272,7 @@ local elements = {
 	
 	{117, "Ts", "Tennessine"},
 	
-	{118, "Og", "Oganesson", "he_him", {
-		topuplib.formatText({{"Balances "},{"Chips", "chips"},{" and "},{"Mult", "mult"}}),
-		topuplib.formatText({{"before scoring"}})
-	}},
+	{118, "Og", "Oganesson", "he_him"},
 	
 	{119, "Uue", "Ununennium", "unknown", rarity = 4},
 	
@@ -340,7 +326,9 @@ for k,v in pairs(elements) do
 			ElementCattosUncommon = true,
 			ElementCattosRare = true
 		},
-		rarity = v.rarity or 3
+		rarity = v.rarity or 3,
+		config = v.config,
+		loc_vars = v.loc_vars
 	})
 	
 	if v[6] then

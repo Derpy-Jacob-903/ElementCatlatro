@@ -4,6 +4,24 @@
 local mod = SMODS.current_mod
 local config = mod.config
 elementcattos = {
+	loc_txt_amatch_pattern = "%{_A[^%}]+%}",
+	loc_txt = function(d)
+		d.text = d.text and topuplib.asub(d.text) or nil
+		local xline = {}
+		--TODO: localize these currently english-only strings
+		if d.anum then xline[1] = "Atomic number: " .. tostring(d.anum) end
+		if d.sym then xline[#xline + 1] = "Symbol: " .. d.sym end
+		if d.compound then xline[#xline + 1] = "Formula: " .. elementcattos.formatFormula(elementcattos.compounds[d.compound][1]) end
+		if #xline ~= 0 then
+			d.text = d.text or {}
+			d.text[#d.text + 1] = "{C:inactive}" .. table.concat(xline, ", ")
+		end
+		return {
+			name = d.name,
+			text = d.text,
+			unlock = d.unlock
+		}
+	end,
 	--Radioactive
 	isRadioactive = function(card)
 		return elementcattos.radioactive(card.config.center.key) ~= nil
