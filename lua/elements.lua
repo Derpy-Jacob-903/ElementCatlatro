@@ -34,7 +34,7 @@ local elements = {
         return { vars = { card.ability.extra.chips } }
     end},
 	
-	{4, "Be", "Beryllium"},
+	{4, "Be", "Beryllium", "she_her"},
 	
 	{5, "B", "Boron", "he_him", rarity = 3},
 	
@@ -42,13 +42,13 @@ local elements = {
         return { vars = { card.ability.extra.xchips } }
     end},
 	
-	{7, "N", "Nitrogen", rarity = 1},
+	{7, "N", "Nitrogen", "she_her", rarity = 1},
 	
 	{8, "O", "Oxygen", "she_her", rarity = 1, config = { extra = {chips = 10, mult = 0.5} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
     end},
 	
-	{9, "F", "Fluorine", rarity = 2},
+	{9, "F", "Fluorine", "she_her", rarity = 2},
 	
 	{10, "Ne", "Neon", "she_her", rarity = 1, config = { extra = {xmult = 1.5} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult } }
@@ -56,7 +56,7 @@ local elements = {
 	
 	{11, "Na", "Sodium", "he_him", rarity = 1},
 	
-	{12, "Mg", "Magnesium", rarity = 1},
+	{12, "Mg", "Magnesium", "she_her", rarity = 1},
 	
 	{13, "Al", "Aluminium", "he_him", rarity = 1},
 	
@@ -66,23 +66,23 @@ local elements = {
 	
 	{15, "P", "Phosphorus", "he_him", rarity = 1},
 	
-	{16, "S", "Sulfur", rarity = 1},
+	{16, "S", "Sulfur", "she_her", rarity = 1},
 	
-	{17, "Cl", "Chlorine", rarity = 1},
+	{17, "Cl", "Chlorine", "she_her", rarity = 1},
 	
 	{18, "Ar", "Argon", "they_them"},
 	
-	{19, "K", "Potassium", rarity = 1},
+	{19, "K", "Potassium", "she_her", rarity = 1},
 	
 	{20, "Ca", "Calcium", "they_them", rarity = 1},
 	
 	{21, "Sc", "Scandium", "he_him", rarity = 2},
 	
-	{22, "Ti", "Titanium", rarity = 1},
+	{22, "Ti", "Titanium", "she_her", rarity = 1},
 	
 	{23, "V", "Vanadium", "he_him", rarity = 1},
 	
-	{24, "Cr", "Chromium", rarity = 1},
+	{24, "Cr", "Chromium", "she_her", rarity = 1},
 	
 	{25, "Mn", "Manganese", "he_him", rarity = 1},
 	
@@ -92,7 +92,7 @@ local elements = {
 	
 	{28, "Ni", "Nickel", "he_him", rarity = 1},
 	
-	{29, "Cu", "Copper", rarity = 1},
+	{29, "Cu", "Copper", "she_her", rarity = 1},
 	
 	{30, "Zn", "Zinc", "he_him", rarity = 1},
 	
@@ -104,13 +104,13 @@ local elements = {
 	
 	{34, "Se", "Selenium", "he_him", rarity = 3},
 	
-	{35, "Br", "Bromine"},
+	{35, "Br", "Bromine", "he_she"},
 	
-	{36, "Kr", "Krypton"},
+	{36, "Kr", "Krypton", "she_her"},
 	
-	{37, "Rb", "Rubidium"},
+	{37, "Rb", "Rubidium", "they_them"},
 	
-	{38, "Sr", "Strontium", rarity = 2},
+	{38, "Sr", "Strontium", "she_her", rarity = 2},
 	
 	{39, "Y", "Yttrium", "he_him", rarity = 3},
 	
@@ -120,23 +120,23 @@ local elements = {
 	
 	{42, "Mo", "Molybdenum", "he_him", rarity = 3},
 	
-	{43, "Tc", "Technetium"},
+	{43, "Tc", "Technetium", "she_her"},
 	
-	{44, "Ru", "Ruthenium"},
+	{44, "Ru", "Ruthenium", "she_her"},
 	
 	{45, "Rh", "Rhodium", "they_them"},
 	
-	{46, "Pd", "Palladium", rarity = 3},
+	{46, "Pd", "Palladium", "she_her", rarity = 3},
 	
-	{47, "Ag", "Silver"},
+	{47, "Ag", "Silver", "she_her"},
 	
-	{48, "Cd", "Cadmium"},
+	{48, "Cd", "Cadmium", "she_her"},
 	
 	{49, "In", "Indium", "he_him"},
 	
 	{50, "Sn", "Tin", "he_him"},
 	
-	{51, "Sb", "Antimony"},
+	{51, "Sb", "Antimony", "she_her"},
 	
 	{52, "Te", "Tellurium", "he_him"},
 	
@@ -150,13 +150,13 @@ local elements = {
 	
 	{57, "La", "Lanthanum", "he_him"},
 	
-	{58, "Ce", "Cerium", rarity = 3},
+	{58, "Ce", "Cerium", "she_her", rarity = 3},
 	
-	{59, "Pr", "Praseodymium"},
+	{59, "Pr", "Praseodymium", "she_her"},
 	
 	{60, "Nd", "Neodymium", "they_them", rarity = 3},
 	
-	{61, "Pm", "Promethium"},
+	{61, "Pm", "Promethium", "she_her"},
 	
 	{62, "Sm", "Samarium", "he_him"},
 	
@@ -164,11 +164,11 @@ local elements = {
 	
 	{64, "Gd", "Gadolinium", "they_them"},
 	
-	{65, "Tb", "Terbium"},
+	{65, "Tb", "Terbium", "she_her"},
 	
-	{66, "Dy", "Dysprosium"},
+	{66, "Dy", "Dysprosium", "she_her"},
 	
-	{67, "Ho", "Holmium"},
+	{67, "Ho", "Holmium", "she_her"},
 	
 	{68, "Er", "Erbium", "they_them"},
 	
@@ -176,11 +176,11 @@ local elements = {
 	
 	{70, "Yb", "Ytterbium", "they_them"},
 	
-	{71, "Lu", "Lutetium"},
+	{71, "Lu", "Lutetium", "she_her"},
 	
 	{72, "Hf", "Hafnium", "they_them"},
 	
-	{73, "Ta", "Tantalum"},
+	{73, "Ta", "Tantalum", "she_her"},
 	
 	{74, "W", "Tungsten", "he_him"},
 	
@@ -188,27 +188,27 @@ local elements = {
 	
 	{76, "Os", "Osmium", "he_him"},
 	
-	{77, "Ir", "Iridium"},
+	{77, "Ir", "Iridium", "she_her"},
 	
-	{78, "Pt", "Platinum", rarity = 3},
+	{78, "Pt", "Platinum", "she_her", rarity = 3},
 	
-	{79, "Au", "Gold"},
+	{79, "Au", "Gold", "she_her"},
 	
 	{80, "Hg", "Mercury", "she_he"},
 	
 	{81, "Tl", "Thallium", "he_him"},
 	
-	{82, "Pb", "Lead"},
+	{82, "Pb", "Lead", "she_her"},
 	
 	{83, "Bi", "Bismuth", "she_he"},
 	
-	{84, "Po", "Polonium"},
+	{84, "Po", "Polonium", "she_her"},
 	
 	{85, "At", "Astatine", "unknown"},
 	
-	{86, "Rn", "Radon"},
+	{86, "Rn", "Radon", "she_her"},
 	
-	{87, "Fr", "Francium"},
+	{87, "Fr", "Francium", "she_her"},
 	
 	{88, "Ra", "Radium", "they_them"},
 	
@@ -228,17 +228,17 @@ local elements = {
         return { vars = { card.ability.extra.xmult } }
     end},
 	
-	{96, "Cm", "Curium"},
+	{96, "Cm", "Curium", "she_her"},
 	
 	{97, "Bk", "Berkelium", "he_him"},
 	
-	{98, "Cf", "Californium"},
+	{98, "Cf", "Californium", "she_her"},
 	
-	{99, "Es", "Einsteinium"},
+	{99, "Es", "Einsteinium", "he_him"},
 	
 	{100, "Fm", "Fermium", "they_them"},
 	
-	{101, "Md", "Mendelevium"},
+	{101, "Md", "Mendelevium", "he_him"},
 	
 	{102, "No", "Nobelium", "they_them"},
 	
@@ -248,7 +248,7 @@ local elements = {
 	
 	{105, "Db", "Dubnium", "tree_trim"},
 	
-	{106, "Sg", "Seaborgium"},
+	{106, "Sg", "Seaborgium", "she_her"},
 	
 	{107, "Bh", "Bohrium", "they_any"},
 	
@@ -262,15 +262,15 @@ local elements = {
 	
 	{112, "Cn", "Copernicium", "he_she"},
 	
-	{113, "Nh", "Nihonium"},
+	{113, "Nh", "Nihonium", "she_her"},
 	
-	{114, "Fl", "Flerovium", "he_him"},
+	{114, "Fl", "Flerovium", "he_she"},
 	
 	{115, "Mc", "Moscovium", "he_they"},
 	
 	{116, "Lv", "Livermorium", "she_he"},
 	
-	{117, "Ts", "Tennessine"},
+	{117, "Ts", "Tennessine", "she_her"},
 	
 	{118, "Og", "Oganesson", "he_him"},
 	
