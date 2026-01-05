@@ -1,5 +1,5 @@
 elementcattos.validTransformElement = function(card)
-	return not card.ability.eternal and card.config.center.atomic_number
+	return not SMODS.is_eternal(card) and card.config.center.atomic_number
 end
 
 elementcattos.getFusion = function()
@@ -74,15 +74,15 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 				for k,v in pairs(result[2]) do
 					G.jokers.highlighted[v]:set_edition("e_negative")
 				end
-				G.jokers.highlighted[result[3]]:shatter()
+				G.jokers.highlighted[result[3]]:start_dissolve()
 			end
 			return
 		end
 		local j1 = G.jokers.highlighted[1]
 		local j2 = G.jokers.highlighted[2]
 		local resultEdition = (j1.edition and j1.edition.key) or (j2.edition and j2.edition.key)
-		j2:shatter()
-		j1:shatter()
+		j2:start_dissolve()
+		j1:start_dissolve()
 		SMODS.add_card({
 			set = "Joker",
 			key = result,
@@ -110,7 +110,7 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 		if not r1 then return print("Wrong use for Fission Hammer") end
 		local j1 = G.jokers.highlighted[1]
 		local resultEdition = (j1.edition and j1.edition.key)
-		j1:shatter()
+		j1:start_dissolve()
 		SMODS.add_card({
 			set = "Joker",
 			key = r1,
@@ -190,7 +190,7 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 		return #G.jokers.highlighted == 1 and elementcattos.cardFromMod(G.jokers.highlighted[1])
 	end,
 	use = function()
-		G.jokers.highlighted[1]:shatter()
+		G.jokers.highlighted[1]:start_dissolve()
 	end
 }.key)
 
