@@ -1,5 +1,5 @@
-elementcattos.validTransformElement = function(card)
-	return not SMODS.is_eternal(card) and card.config.center.atomic_number
+elementcattos.validTransformElement = function(card, allowEternal)
+	return (allowEternal or not SMODS.is_eternal(card)) and card.config.center.atomic_number
 end
 
 elementcattos.getFusion = function()
@@ -10,10 +10,10 @@ elementcattos.getFusion = function()
 		local lol = 0
 		local ind = 0
 		for k,v in pairs(G.jokers.highlighted) do
-			if v.config.center.key == "j_ecattos_naium" then
+			if v.config.center.key == "j_ecattos_naium" and not SMODS.is_eternal(v) then
 				lol = lol + 1
 				ind = k
-			elseif elementcattos.validTransformElement(v) or elementcattos.othercattos[card.config.center.key] then
+			elseif elementcattos.validTransformElement(v, true) or elementcattos.othercattos[v.config.center.key] then
 				table.insert(dudes[2], k)
 			else return end
 		end
