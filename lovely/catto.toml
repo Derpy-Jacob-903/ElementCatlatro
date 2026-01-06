@@ -3,7 +3,7 @@ version = "1.0.0"
 priority = 4
 
 [[patches]]
-# this is very awesome jank
+# this is very awesome jank that shouldnt break with updates adding newlines to the end anymore
 [patches.copy]
 target = '''=[SMODS cardpronouns "badge.lua"]'''
 position = "append"
@@ -12,10 +12,9 @@ sources = [
 ]
 
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = '''=[SMODS cardpronouns "badge.lua"]'''
-pattern = '''end
-AAAAAAAAAAAAAAAAAAAAAAA'''
+pattern = '''end\n+AAAAAAAAAAAAAAAAAAAAAAA'''
 position = "at"
 payload = ''
 match_indent = false
