@@ -1,6 +1,21 @@
 return {
+	misc = {
+		dictionary = {
+			ecattos_compoundcreator_tocreate = "Compound to create",
+			ecattos_compoundcreator_confirm = "Confirm",
+			k_booster_group_p_ecattos_element_common = "Elements Pack",
+			k_booster_group_p_ecattos_element_uncommon = "Elements Pack",
+			k_booster_group_p_ecattos_element_rare = "Elements Pack",
+			k_booster_group_p_ecattos_element_tools = "Tools Pack",
+			ecattos_fusion_negative = "Negative Edition",
+			ecattos_fusion_none = "None",
+			ecattos_fission_none = "None",
+			ecattos_recipe_name_stone_cards = "6 Stone Cards"
+		}
+	},
 	descriptions = {
 		Joker = {
+			--Elements
 			j_ecattos_element0 = elementcattos.loc_txt {
 				name = "Muonium",
 				text = {
@@ -27,6 +42,7 @@ return {
 			},
 			j_ecattos_element3 = elementcattos.loc_txt {
 				name = "Lithium",
+				--i wanna change this as i dont rly want elements to have "This Joker gains" effects
 				text = {
 					"Gains {C:chips}Chips{} equal to",
 					"{_A:attention:1/12th} of scored {C:mult}Mult{}",
@@ -34,6 +50,16 @@ return {
 				},
 				anum = 2,
 				sym = "He"
+			},
+			j_ecattos_element5 = elementcattos.loc_txt {
+				name = "Boron",
+				text = {
+					"Levels up last played poker hand",
+					"when Compound Creator is used",
+					"{_A:currentattention:#1#}"
+				},
+				anum = 5,
+				sym = "B"
 			},
 			j_ecattos_element6 = elementcattos.loc_txt {
 				name = "Carbon",
@@ -47,7 +73,7 @@ return {
 			j_ecattos_element8 = elementcattos.loc_txt {
 				name = "Oxygen",
 				text = {
-					"{_A:chips:#1#} or {_A:mult:#2#}",
+					"{_A:chips:+#1#} or {_A:mult:+#2#}",
 					"per scored card"
 				},
 				anum = 8,
@@ -70,6 +96,44 @@ return {
 				anum = 14,
 				sym = "Si"
 			},
+			j_ecattos_element28 = elementcattos.loc_txt {
+				name = "Nickel",
+				text = {
+					"Earn {_A:money:2} at end of round",
+					"Payout increases by {_A:money:1}",
+					"when Boss Blind is defeated"
+				},
+				anum = 28,
+				sym = "Ni"
+			},
+			j_ecattos_element33 = elementcattos.loc_txt {
+				name = "Arsenic",
+				--maybe i dont actually want arsenic to be meta
+				--[[text = {
+					"Retrigger all scored cards, but",
+					"X3 Blind score requirement",
+				},]]
+				anum = 33,
+				sym = "As"
+			},
+			j_ecattos_element79 = elementcattos.loc_txt {
+				name = "Gold",
+				text = {
+					"Raise the cap on interest",
+					"earned in each round by {_A:money:10}"
+				},
+				anum = 79,
+				sym = "Au"
+			},
+			j_ecattos_element94 = elementcattos.loc_txt {
+				name = "Plutonium",
+				text = {
+					"If {C:attention}played hand{} has only {C:attention}1{} card,",
+					"cards {C:attention}held in hand{} give {_A:xmult:1.21}"
+				},
+				anum = 94,
+				sym = "Pu"
+			},
 			j_ecattos_element95 = elementcattos.loc_txt {
 				name = "Americium",
 				text = {
@@ -88,6 +152,25 @@ return {
 				anum = 118,
 				sym = "Og"
 			},
+			j_ecattos_element119 = elementcattos.loc_txt {
+				name = "Ununennium",
+				text = {
+					"{_A:echips:1.025} per scored",
+					"unique rank in hand"
+				},
+				anum = 119,
+				sym = "Uue"
+			},
+			j_ecattos_element120 = elementcattos.loc_txt {
+				name = "Unbinilium",
+				text = {
+					"When Boss Blind is defeated, upgrades",
+					"played poker hand with {_A:basexmult:1.25}"
+				},
+				anum = 120,
+				sym = "Ubn"
+			},
+			--Specials
 			j_ecattos_purrcent = elementcattos.loc_txt {
 				name = "Purrcent",
 				text = {
@@ -122,6 +205,7 @@ return {
 				anum = "Omega",
 				sym = "N/A"
 			},
+			--Compounds
 			j_ecattos_compound_water = elementcattos.loc_txt {
 				name = "Water",
 				text = {
@@ -192,7 +276,7 @@ return {
 			},
 			c_ecattos_eraser = {
 				name = "Matter Eraser",
-				text = {
+				text = topuplib.asub {
 					"Destroys {_A:attention:1} selected",
 					"Element Catto",
 					"{C:inactive}(Bypasses Eternal)"
@@ -203,7 +287,7 @@ return {
 				text = topuplib.asub {
 					"Select {_A:attention:1} Compound to form",
 					"using Elements you have",
-					"{C:inactive}(First Edition is kept){}"
+					"{C:inactive}(First Edition is kept)"
 				}
 			},
 			c_ecattos_tweezers = {
@@ -222,6 +306,48 @@ return {
 					"Removes an Electron from",
 					"{_A:attention:1} selected Element Catto",
 					"{_A:musthaveroom}"
+				}
+			}
+		},
+		Other = {
+			p_ecattos_element_common = {
+				name = "Common Elements Pack",
+				text = topuplib.asub {
+					"Select {C:attention}2{} of {C:attention}5{} {_A:common}",
+					"Element Cattos"
+				}
+			},
+			p_ecattos_element_uncommon = {
+				name = "Uncommon Elements Pack",
+				text = topuplib.asub {
+					"Select {C:attention}2{} of {C:attention}5{} {_A:uncommon}",
+					"Element Cattos"
+				}
+			},
+			p_ecattos_element_rare = {
+				name = "Common Elements Pack",
+				text = topuplib.asub {
+					"Select {C:attention}1{} of {C:attention}3{} {_A:rare}",
+					"Element Cattos"
+				}
+			},
+			p_ecattos_element_tools = {
+				name = "Tools Pack",
+				text = {
+					"Select {C:attention}1{} of {C:attention}4{} {C:tarot}Tools{}",
+					"to use immediately"
+				}
+			}
+		},
+		Back = {
+			b_ecattos_elements = {
+				name = "Element Cattos Deck",
+				text = topuplib.asub {
+					"Only Jokers from {C:attention}Element",
+					"{C:attention}Catlatro{} may appear",
+					"{C:attention}+24{} Joker slots",
+					"Start with additional {_A:money:8}",
+					"and {C:attention}Overstock Plus{}"
 				}
 			}
 		}

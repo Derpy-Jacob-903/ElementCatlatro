@@ -14,7 +14,7 @@ SMODS.Joker {
 	atlas = "special",
 	rarity = 3,
 	pos = {x = 1, y = 0},
-	element_symbol = ":3"
+	element_symbol = "cta"
 }
 
 SMODS.Joker {

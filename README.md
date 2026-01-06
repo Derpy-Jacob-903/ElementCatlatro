@@ -1,5 +1,6 @@
 # ElementCatlatro
 ### Requires [TopUpLib](https://github.com/VMan-2002/TopUpLib)
+Supports [CardPronouns](https://github.com/real-niacat/CardPronouns)
 
 element cattos balatro mod (REAL)
 

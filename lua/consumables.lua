@@ -1,5 +1,5 @@
 elementcattos.validTransformElement = function(card)
-	return not card.ability.eternal and card.config.center.atomic_number
+	return not SMODS.is_eternal(card) and card.config.center.atomic_number
 end
 
 elementcattos.getFusion = function()
@@ -33,6 +33,7 @@ end
 elementcattos.getFission = function()
 	if not G.jokers or #G.jokers.highlighted ~= 1 then return end
 	local a = elementcattos.validTransformElement(G.jokers.highlighted[1])
+	if not a then return end
 	local r1, r2 = math.floor(a * 0.5), math.ceil(a * 0.5)
 	if a and elementcattos.atomicnumber[r1] and elementcattos.atomicnumber[r2] then
 		return "j_ecattos_element" .. tostring(r1), "j_ecattos_element" .. tostring(r2)
@@ -55,13 +56,13 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 		local fuse = elementcattos.getFusion()
 		if type(fuse) == "table" then
 			if fuse[1] == "naium" then
-				fuse = "Negative Edition"
+				fuse = localize("ecattos_fusion_negative")
 			end
 		elseif fuse then
 			fuse = topuplib.nameFromKey(fuse)
 		end
 		return {
-			vars = {fuse or "None"}
+			vars = {fuse or localize("ecattos_fusion_none")}
 		}
 	end,
 	can_use = elementcattos.getFusion,
@@ -73,15 +74,15 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 				for k,v in pairs(result[2]) do
 					G.jokers.highlighted[v]:set_edition("e_negative")
 				end
-				G.jokers.highlighted[result[3]]:shatter()
+				G.jokers.highlighted[result[3]]:start_dissolve()
 			end
 			return
 		end
 		local j1 = G.jokers.highlighted[1]
 		local j2 = G.jokers.highlighted[2]
 		local resultEdition = (j1.edition and j1.edition.key) or (j2.edition and j2.edition.key)
-		j2:shatter()
-		j1:shatter()
+		j2:start_dissolve()
+		j1:start_dissolve()
 		SMODS.add_card({
 			set = "Joker",
 			key = result,
@@ -98,7 +99,7 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 	loc_vars = function(self, info_queue, card)
 		local a, b = elementcattos.getFission()
 		return {
-			vars = a and {topuplib.nameFromKey(a), topuplib.nameFromKey(b)} or {"None", "None"}
+			vars = a and {topuplib.nameFromKey(a), topuplib.nameFromKey(b)} or {localize("ecattos_fission_none"), localize("ecattos_fission_none")}
 		}
 	end,
 	can_use = function()
@@ -109,7 +110,7 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 		if not r1 then return print("Wrong use for Fission Hammer") end
 		local j1 = G.jokers.highlighted[1]
 		local resultEdition = (j1.edition and j1.edition.key)
-		j1:shatter()
+		j1:start_dissolve()
 		SMODS.add_card({
 			set = "Joker",
 			key = r1,
@@ -189,7 +190,7 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 		return #G.jokers.highlighted == 1 and elementcattos.cardFromMod(G.jokers.highlighted[1])
 	end,
 	use = function()
-		G.jokers.highlighted[1]:shatter()
+		G.jokers.highlighted[1]:start_dissolve()
 	end
 }.key)
 

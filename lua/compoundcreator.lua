@@ -42,14 +42,13 @@ local UIBox_ecatto_compound_creator = function(_card)
 	for k,v in pairs(elementcattos.compounds) do
 		if elementcattos.hasFormula(v[1]) then
 			--todo: centers without loc_txt need to display their actual name
-			local name = tostring(type(v[2]) == "table" and v[2].name or 
-				((SMODS.Centers[v[2]] and SMODS.Centers[v[2]].loc_txt.name) or k))
+			local name = tostring(type(v[2]) == "table" and v[2].name or topuplib.nameFromKey(v[2]))
 			names[#names+1] = name .. ": " .. elementcattos.formatFormula(v[1], true)
 			ids[#names] = k
 		end
 	end
 	local thing0 = create_option_cycle({
-		label = "Compound to create",
+		label = localize("ecattos_compoundcreator_tocreate"),
 		options = names,
 		current_option = 1,
 		w = 7,
@@ -57,7 +56,7 @@ local UIBox_ecatto_compound_creator = function(_card)
 			selectedItem = arg.cycle_config.current_option
 		end)
 	})
-	local confirmbtn = UIBox_button({button = confirm, label = {"Confirm"}, minw = 5, focus_args = {snap_to = true}})
+	local confirmbtn = UIBox_button({button = confirm, label = {localize("ecattos_compoundcreator_confirm")}, minw = 5, focus_args = {snap_to = true}})
 	
 	if #names == 0 then
 		names[1] = "None"
