@@ -66,6 +66,12 @@ elementcattos = {
 	othercattos = { -- Keys of jokers that are cattos
 	
 	},
+	getAtomicMass = function(card)
+		if not card.config.center.element_base_mass then
+			return nil
+		end
+		return card.config.center.element_base_mass + ((card.ability.extra and card.ability.extra.atomic_mass_offset) or 0)
+	end,
 	pronoun = function(n)
 		if not CardPronouns then return end
 		if CardPronouns.badge_types[n] then return n end
