@@ -347,7 +347,9 @@ return {
 					"{C:attention}Catlatro{} may appear",
 					"{C:attention}+24{} Joker slots",
 					"Start with additional {_A:money:8}",
-					"and {C:attention}Overstock Plus{}"
+					"and {C:attention}Overstock Plus{}",
+					"{C:inactive,s:0.7}Placeholder Joker effects{}",
+					"{C:inactive,s:0.7}are reduced by 75%{}"
 				}
 			}
 		}

@@ -72,7 +72,8 @@ for k,v in ipairs(compounds) do
 		rarity = v.rarity,
 		in_pool = inpool,
 		config = v.config,
-		loc_vars = v.loc_vars
+		loc_vars = v.loc_vars,
+		calculate = v.calculate
 	})
 	elementcattos.compounds[v.id] = {v.formula, j.key}
 end

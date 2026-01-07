@@ -22,13 +22,31 @@ local elements = {
 	--Atomic number, Symbol, Name, Pronouns, Text, Calculate
 	{0, "Mu", "Muonium", "hse_ehr", nil, rarity = 3},
 	
-	{1, "H", "Hydrogen", "she_her", nil, rarity = 1, config = { extra = {chips = 25} }, loc_vars = function(self, info_queue, card)
+	{1, "H", "Hydrogen", "she_her", nil, rarity = 1, config = { extra = {chips = 25} }, 
+	loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
-    end},
+    end,
+	calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                chips = card.ability.extra.chips
+            }
+        end
+    end,
+	},
 	
-	{2, "He", "Helium", "he_him", nil, rarity = 1, config = { extra = {mult = 2.5} }, loc_vars = function(self, info_queue, card)
+	{2, "He", "Helium", "he_him", nil, rarity = 1, config = { extra = {mult = 2.5} }, 
+	loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
-    end},
+    end,
+	calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                mult = card.ability.extra.mult
+            }
+        end
+    end,
+	},
 	
 	{3, "Li", "Lithium", "he_him", nil, rarity = 2, config = { extra = {chips = 0} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
@@ -328,7 +346,34 @@ for k,v in pairs(elements) do
 		},
 		rarity = v.rarity or 3,
 		config = v.config,
-		loc_vars = v.loc_vars
+		loc_vars = v.loc_vars,
+		calculate = v.calculate or function(self, card, context)
+			if G.GAME.selected_back.effect.center.key == 'b_ecattos_elements' then
+				if context.joker_main then
+					if v.rarity == 1 then
+						return { mult = 0.5 }
+					elseif v.rarity == 2 then
+						return { chips = 17.5 }
+					else
+						return { Xmult = 1.125 }
+					end
+				end
+			else
+				if context.joker_main then
+					if v.rarity == 1 then
+						if G.GAME.selected_back.effect.center.key == 'b_cry_beige' then 
+							return { mult = 8 }
+						else
+							return { mult = 2 }
+						end 
+					elseif v.rarity == 2 then
+						return { chips = 70 }
+					else
+						return { Xmult = 1.5 }
+					end
+				end
+			end
+		end
 	})
 	
 	if v[6] then
