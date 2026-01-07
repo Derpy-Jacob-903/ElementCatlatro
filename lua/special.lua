@@ -5,6 +5,28 @@ SMODS.Atlas({
 	py = 95
 })
 
+--Subatomic particles
+
+SMODS.Joker {
+	key = "neutron",
+	atlas = "special",
+	rarity = 1,
+	pos = {x = 6, y = 0},
+	in_pool = topuplib.returnFalse,
+    pixel_size = { w = 47, h = 39 }
+}
+
+SMODS.Joker {
+	key = "electron",
+	atlas = "special",
+	rarity = 1,
+	pos = {x = 7, y = 0},
+	in_pool = topuplib.returnFalse,
+    pixel_size = { w = 26, h = 26 }
+}
+
+--Cattos
+
 SMODS.Joker {
 	key = "purrcent",
 			--[["Absorbs Editions that would be",
