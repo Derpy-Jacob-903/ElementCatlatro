@@ -143,9 +143,17 @@ if topuplib.debug then
 		atlas = "tools",
 		pos = {x = 2, y = 0},
 		can_use = function()
-			return false
+			return #G.jokers.highlighted == 1 and elementcattos.validTransformElement(G.jokers.highlighted[1], true)
 		end,
-		use = function() end
+		use = function()
+			--TODO: actually remove a neutron from the target
+			--...which isn't a "stat" that exists yet
+			SMODS.add_card({
+				set = "Joker",
+				key = "j_ecattos_neutron",
+				no_edition = true
+			})
+		end
 	}.key)
 	
 	table.insert(elementcattos.tools, SMODS.Consumable {

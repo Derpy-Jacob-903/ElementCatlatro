@@ -4,6 +4,7 @@ local compounds = {
 		name = "Water",
 		pronouns = "she_her",
 		formula = {{"H", 2}, "O"},
+		pos = {x = 1, y = 0}
 	},
 	{
 		id = "starch",
@@ -35,6 +36,28 @@ local compounds = {
 		loc_vars = function(self, info_queue, card)
 			return { vars = { card.ability.extra.mult } }
 		end
+	},
+	{
+		id = "neodymium_magnet",
+		pronouns = "they_them",
+		formula = {{"Nd", 2}, {"Fe", 14}, "B"},
+		rarity = 2,
+		cost = 19,
+		pos = {x = 2, y = 0},
+		config = {extra = {odds = 4}},
+		loc_vars = function(self, info_queue, card)
+			local aaa, bbb = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "ECattos_NeodymiumMagnet")
+			return { vars = { aaa, bbb } }
+		end,
+		calculate = function(self, card, context)
+			if context.before then
+				for k,v in pairs(G.hand.cards) do
+					if v.config.center_key == "m_steel" and not v.edition and SMODS.pseudorandom_probability(card, 'ECattos_NeodymiumMagnet', 1, card.ability.extra.odds) then
+						v:set_edition("e_negative")
+					end
+				end
+			end
+		end
 	}
 }
 
@@ -53,7 +76,7 @@ end
 
 for k,v in ipairs(compounds) do
 	v.desc = v.desc or {}
-	table.insert(v.desc, topuplib.formatText({{"Formula: " .. elementcattos.formatFormula(v.formula), "inactive"}}))
+	table.insert(v.desc, "{C:inactive}Formula: " .. elementcattos.formatFormula(v.formula))
 	local j = SMODS.Joker({
 		key = "compound_" .. v.id,
 		loc_txt = {
@@ -61,10 +84,7 @@ for k,v in ipairs(compounds) do
 			text = v.desc
 		},
 		atlas = "compounds",
-		pos = {
-			x = v.id == "water" and 1 or 0,
-			y = 0
-		},
+		pos = v.pos or {x=0, y=0},
 		pronouns = elementcattos.pronoun(v.pronouns),
 		cost = v.cost or 6,
 		compound_formula = v.formula,
@@ -72,7 +92,8 @@ for k,v in ipairs(compounds) do
 		rarity = v.rarity,
 		in_pool = inpool,
 		config = v.config,
-		loc_vars = v.loc_vars
+		loc_vars = v.loc_vars,
+		calculate = v.calculate
 	})
 	elementcattos.compounds[v.id] = {v.formula, j.key}
 end

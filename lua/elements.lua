@@ -19,264 +19,264 @@
 ]]
 
 local elements = {
-	--Atomic number, Symbol, Name, Pronouns, Text, Calculate
-	{0, "Mu", "Muonium", "hse_ehr", nil, rarity = 3},
+	--Atomic number, Symbol, Name, Pronouns, Base Mass, Calculate
+	{0, "Mu", "Muonium", "hse_ehr", 0, rarity = 3},
 	
-	{1, "H", "Hydrogen", "she_her", nil, rarity = 1, config = { extra = {chips = 25} }, loc_vars = function(self, info_queue, card)
+	{1, "H", "Hydrogen", "she_her", 1, rarity = 1, config = { extra = {chips = 25} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
     end},
 	
-	{2, "He", "Helium", "he_him", nil, rarity = 1, config = { extra = {mult = 2.5} }, loc_vars = function(self, info_queue, card)
+	{2, "He", "Helium", "he_him", 4, rarity = 1, config = { extra = {mult = 2.5} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
     end},
 	
-	{3, "Li", "Lithium", "he_him", nil, rarity = 2, config = { extra = {chips = 0} }, loc_vars = function(self, info_queue, card)
+	{3, "Li", "Lithium", "he_him", 7, rarity = 2, config = { extra = {chips = 0} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
     end},
 	
-	{4, "Be", "Beryllium", "she_her"},
+	{4, "Be", "Beryllium", "she_her", 9},
 	
-	{5, "B", "Boron", "he_him", rarity = 3},
+	{5, "B", "Boron", "he_him", 11, rarity = 3},
 	
-	{6, "C", "Carbon", "he_him", rarity = 1, config = { extra = {xchips = 1.15} }, loc_vars = function(self, info_queue, card)
+	{6, "C", "Carbon", "he_him", 12, rarity = 1, config = { extra = {xchips = 1.15} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xchips } }
     end},
 	
-	{7, "N", "Nitrogen", "she_her", rarity = 1},
+	{7, "N", "Nitrogen", "she_her", 14, rarity = 1},
 	
-	{8, "O", "Oxygen", "she_her", rarity = 1, config = { extra = {chips = 10, mult = 0.5} }, loc_vars = function(self, info_queue, card)
+	{8, "O", "Oxygen", "she_her", 16, rarity = 1, config = { extra = {chips = 10, mult = 0.5} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
     end},
 	
-	{9, "F", "Fluorine", "she_her", rarity = 2},
+	{9, "F", "Fluorine", "she_her", 19, rarity = 2},
 	
-	{10, "Ne", "Neon", "she_her", rarity = 1, config = { extra = {xmult = 1.5} }, loc_vars = function(self, info_queue, card)
+	{10, "Ne", "Neon", "she_her", 20, rarity = 1, config = { extra = {xmult = 1.5} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult } }
     end},
 	
-	{11, "Na", "Sodium", "he_him", rarity = 1},
+	{11, "Na", "Sodium", "he_him", 23, rarity = 1},
 	
-	{12, "Mg", "Magnesium", "she_her", rarity = 1},
+	{12, "Mg", "Magnesium", "she_her", 24, rarity = 1},
 	
-	{13, "Al", "Aluminium", "he_him", rarity = 1},
+	{13, "Al", "Aluminium", "he_him", 27, rarity = 1},
 	
-	{14, "Si", "Silicon", "he_him", rarity = 1, config = { extra = {more = 1} }, loc_vars = function(self, info_queue, card)
+	{14, "Si", "Silicon", "he_him", 28, rarity = 1, config = { extra = {more = 1} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.more } }
     end},
 	
-	{15, "P", "Phosphorus", "he_him", rarity = 1},
+	{15, "P", "Phosphorus", "he_him", 31, rarity = 1},
 	
-	{16, "S", "Sulfur", "she_her", rarity = 1},
+	{16, "S", "Sulfur", "she_her", 32, rarity = 1},
 	
-	{17, "Cl", "Chlorine", "she_her", rarity = 1},
+	{17, "Cl", "Chlorine", "she_her", 35, rarity = 1},
 	
-	{18, "Ar", "Argon", "they_them"},
+	{18, "Ar", "Argon", "they_them", 40},
 	
-	{19, "K", "Potassium", "she_her", rarity = 1},
+	{19, "K", "Potassium", "she_her", 39, rarity = 1},
 	
-	{20, "Ca", "Calcium", "they_them", rarity = 1},
+	{20, "Ca", "Calcium", "they_them", 40, rarity = 1},
 	
-	{21, "Sc", "Scandium", "he_him", rarity = 2},
+	{21, "Sc", "Scandium", "he_him", 45, rarity = 2},
 	
-	{22, "Ti", "Titanium", "she_her", rarity = 1},
+	{22, "Ti", "Titanium", "she_her", 48, rarity = 1},
 	
-	{23, "V", "Vanadium", "he_him", rarity = 1},
+	{23, "V", "Vanadium", "he_him", 51, rarity = 1},
 	
-	{24, "Cr", "Chromium", "she_her", rarity = 1},
+	{24, "Cr", "Chromium", "she_her", 52, rarity = 1},
 	
-	{25, "Mn", "Manganese", "he_him", rarity = 1},
+	{25, "Mn", "Manganese", "he_him", 55, rarity = 1},
 	
-	{26, "Fe", "Iron", "he_him", nil, rarity = 1},
+	{26, "Fe", "Iron", "he_him", 56, rarity = 1},
 	
-	{27, "Co", "Cobalt", "he_him", rarity = 1},
+	{27, "Co", "Cobalt", "he_him", 59, rarity = 1},
 	
-	{28, "Ni", "Nickel", "he_him", rarity = 1},
+	{28, "Ni", "Nickel", "he_him", 58, rarity = 1},
 	
-	{29, "Cu", "Copper", "she_her", rarity = 1},
+	{29, "Cu", "Copper", "she_her", 63, rarity = 1},
 	
-	{30, "Zn", "Zinc", "he_him", rarity = 1},
+	{30, "Zn", "Zinc", "he_him", 64, rarity = 1},
 	
-	{31, "Ga", "Gallium", "he_him", rarity = 3},
+	{31, "Ga", "Gallium", "he_him", 69, rarity = 3},
 	
-	{32, "Ge", "Germanium", "he_him", rarity = 3},
+	{32, "Ge", "Germanium", "he_him", 74, rarity = 3},
 	
-	{33, "As", "Arsenic", "he_him", rarity = 3},
+	{33, "As", "Arsenic", "he_him", 75, rarity = 3},
 	
-	{34, "Se", "Selenium", "he_him", rarity = 3},
+	{34, "Se", "Selenium", "he_him", 80, rarity = 3},
 	
-	{35, "Br", "Bromine", "he_she"},
+	{35, "Br", "Bromine", "he_she", 79},
 	
-	{36, "Kr", "Krypton", "she_her"},
+	{36, "Kr", "Krypton", "she_her", 84},
 	
-	{37, "Rb", "Rubidium", "they_them"},
+	{37, "Rb", "Rubidium", "they_them", 85},
 	
-	{38, "Sr", "Strontium", "she_her", rarity = 2},
+	{38, "Sr", "Strontium", "she_her", 88, rarity = 2},
 	
-	{39, "Y", "Yttrium", "he_him", rarity = 3},
+	{39, "Y", "Yttrium", "he_him", 89, rarity = 3},
 	
-	{40, "Zr", "Zirconium", "they_it_xe", rarity = 3},
+	{40, "Zr", "Zirconium", "they_it_xe", 90, rarity = 3},
 	
-	{41, "Nb", "Niobium", "they_them"},
+	{41, "Nb", "Niobium", "they_them", 93},
 	
-	{42, "Mo", "Molybdenum", "he_him", rarity = 3},
+	{42, "Mo", "Molybdenum", "he_him", 98, rarity = 3},
 	
-	{43, "Tc", "Technetium", "she_her"},
+	{43, "Tc", "Technetium", "she_her", 99},
 	
-	{44, "Ru", "Ruthenium", "she_her"},
+	{44, "Ru", "Ruthenium", "she_her", 102},
 	
-	{45, "Rh", "Rhodium", "they_them"},
+	{45, "Rh", "Rhodium", "they_them", 103},
 	
-	{46, "Pd", "Palladium", "she_her", rarity = 3},
+	{46, "Pd", "Palladium", "she_her", 106, rarity = 3},
 	
-	{47, "Ag", "Silver", "she_her"},
+	{47, "Ag", "Silver", "she_her", 107},
 	
-	{48, "Cd", "Cadmium", "she_her"},
+	{48, "Cd", "Cadmium", "she_her", 114},
 	
-	{49, "In", "Indium", "he_him"},
+	{49, "In", "Indium", "he_him", 115},
 	
-	{50, "Sn", "Tin", "he_him"},
+	{50, "Sn", "Tin", "he_him", 120},
 	
-	{51, "Sb", "Antimony", "she_her"},
+	{51, "Sb", "Antimony", "she_her", 121},
 	
-	{52, "Te", "Tellurium", "he_him"},
+	{52, "Te", "Tellurium", "he_him", 130},
 	
-	{53, "I", "Iodine", "they_them"},
+	{53, "I", "Iodine", "they_them", 127},
 	
-	{54, "Xe", "Xenon", "xe_xem"},
+	{54, "Xe", "Xenon", "xe_xem", 132},
 	
-	{55, "Cs", "Caesium", "he_him"},
+	{55, "Cs", "Caesium", "he_him", 133},
 	
-	{56, "Ba", "Barium", "he_him", rarity = 3},
+	{56, "Ba", "Barium", "he_him", 138, rarity = 3},
 	
-	{57, "La", "Lanthanum", "he_him"},
+	{57, "La", "Lanthanum", "he_him", 139},
 	
-	{58, "Ce", "Cerium", "she_her", rarity = 3},
+	{58, "Ce", "Cerium", "she_her", 140, rarity = 3},
 	
-	{59, "Pr", "Praseodymium", "she_her"},
+	{59, "Pr", "Praseodymium", "she_her", 141},
 	
-	{60, "Nd", "Neodymium", "they_them", rarity = 3},
+	{60, "Nd", "Neodymium", "they_them", 142, rarity = 3},
 	
-	{61, "Pm", "Promethium", "she_her"},
+	{61, "Pm", "Promethium", "she_her", 147},
 	
-	{62, "Sm", "Samarium", "he_him"},
+	{62, "Sm", "Samarium", "he_him", 152},
 	
-	{63, "Eu", "Europium", "any_all"},
+	{63, "Eu", "Europium", "any_all", 153},
 	
-	{64, "Gd", "Gadolinium", "they_them"},
+	{64, "Gd", "Gadolinium", "they_them", 158},
 	
-	{65, "Tb", "Terbium", "she_her"},
+	{65, "Tb", "Terbium", "she_her", 159},
 	
-	{66, "Dy", "Dysprosium", "she_her"},
+	{66, "Dy", "Dysprosium", "she_her", 164},
 	
-	{67, "Ho", "Holmium", "she_her"},
+	{67, "Ho", "Holmium", "she_her", 165},
 	
-	{68, "Er", "Erbium", "they_them"},
+	{68, "Er", "Erbium", "they_them", 166},
 	
-	{69, "Tm", "Thulium", "he_him"},
+	{69, "Tm", "Thulium", "he_him", 169},
 	
-	{70, "Yb", "Ytterbium", "they_them"},
+	{70, "Yb", "Ytterbium", "they_them", 174},
 	
-	{71, "Lu", "Lutetium", "she_her"},
+	{71, "Lu", "Lutetium", "she_her", 175},
 	
-	{72, "Hf", "Hafnium", "they_them"},
+	{72, "Hf", "Hafnium", "they_them", 180},
 	
-	{73, "Ta", "Tantalum", "she_her"},
+	{73, "Ta", "Tantalum", "she_her", 181},
 	
-	{74, "W", "Tungsten", "he_him"},
+	{74, "W", "Tungsten", "he_him", 184},
 	
-	{75, "Re", "Rhenium", "he_him"},
+	{75, "Re", "Rhenium", "he_him", 187},
 	
-	{76, "Os", "Osmium", "he_him"},
+	{76, "Os", "Osmium", "he_him", 192},
 	
-	{77, "Ir", "Iridium", "she_her"},
+	{77, "Ir", "Iridium", "she_her", 193},
 	
-	{78, "Pt", "Platinum", "she_her", rarity = 3},
+	{78, "Pt", "Platinum", "she_her", 195, rarity = 3},
 	
-	{79, "Au", "Gold", "she_her"},
+	{79, "Au", "Gold", "she_her", 197},
 	
-	{80, "Hg", "Mercury", "she_he"},
+	{80, "Hg", "Mercury", "she_he", 202},
 	
-	{81, "Tl", "Thallium", "he_him"},
+	{81, "Tl", "Thallium", "he_him", 205},
 	
-	{82, "Pb", "Lead", "she_her"},
+	{82, "Pb", "Lead", "she_her", 208},
 	
-	{83, "Bi", "Bismuth", "she_he"},
+	{83, "Bi", "Bismuth", "she_he", 209},
 	
-	{84, "Po", "Polonium", "she_her"},
+	{84, "Po", "Polonium", "she_her", 210},
 	
-	{85, "At", "Astatine", "unknown"},
+	{85, "At", "Astatine", "unknown", 219},
 	
-	{86, "Rn", "Radon", "she_her"},
+	{86, "Rn", "Radon", "she_her", 222},
 	
-	{87, "Fr", "Francium", "she_her"},
+	{87, "Fr", "Francium", "she_her", 223},
 	
-	{88, "Ra", "Radium", "they_them"},
+	{88, "Ra", "Radium", "they_them", 226},
 	
-	{89, "Ac", "Actinium", "he_him"},
+	{89, "Ac", "Actinium", "he_him", 227},
 	
-	{90, "Th", "Thorium", "he_him"},
+	{90, "Th", "Thorium", "he_him", 232},
 	
-	{91, "Pa", "Protactinium", "any_all"},
+	{91, "Pa", "Protactinium", "any_all", 231},
 	
-	{92, "U", "Uranium", "he_any"},
+	{92, "U", "Uranium", "he_any", 238},
 	
-	{93, "Np", "Neptunium", "he_any"},
+	{93, "Np", "Neptunium", "he_any", 237},
 	
-	{94, "Pu", "Plutonium", "he_any"},
+	{94, "Pu", "Plutonium", "he_any", 244},
 	
-	{95, "Am", "Americium", "ecatto_eaglenoise_any", nil, config = { extra = {xmult = 3} }, loc_vars = function(self, info_queue, card)
+	{95, "Am", "Americium", "ecatto_eaglenoise_any", 243, config = { extra = {xmult = 3} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult } }
     end},
 	
-	{96, "Cm", "Curium", "she_her"},
+	{96, "Cm", "Curium", "she_her", 250},
 	
-	{97, "Bk", "Berkelium", "he_him"},
+	{97, "Bk", "Berkelium", "he_him", 247},
 	
-	{98, "Cf", "Californium", "she_her"},
+	{98, "Cf", "Californium", "she_her", 251},
 	
-	{99, "Es", "Einsteinium", "he_him"},
+	{99, "Es", "Einsteinium", "he_him", 252},
 	
-	{100, "Fm", "Fermium", "they_them"},
+	{100, "Fm", "Fermium", "they_them", 257},
 	
-	{101, "Md", "Mendelevium", "he_him"},
+	{101, "Md", "Mendelevium", "he_him", 258},
 	
-	{102, "No", "Nobelium", "they_them"},
+	{102, "No", "Nobelium", "they_them", 259},
 	
-	{103, "Lr", "Lawrencium", "he_they"},
+	{103, "Lr", "Lawrencium", "he_they", 266},
 	
-	{104, "Rf", "Rutherfordium", "they_any"},
+	{104, "Rf", "Rutherfordium", "they_any", 267},
 	
-	{105, "Db", "Dubnium", "tree_trim"},
+	{105, "Db", "Dubnium", "tree_trim", 268},
 	
-	{106, "Sg", "Seaborgium", "she_her"},
+	{106, "Sg", "Seaborgium", "she_her", 267},
 	
-	{107, "Bh", "Bohrium", "they_any"},
+	{107, "Bh", "Bohrium", "they_any", 270},
 	
-	{108, "Hs", "Hassium", "they_them"},
+	{108, "Hs", "Hassium", "they_them", 277},
 	
-	{109, "Mt", "Meitnerium", "she_they"},
+	{109, "Mt", "Meitnerium", "she_they", 278},
 	
-	{110, "Ds", "Darmstadtium", "he_him"},
+	{110, "Ds", "Darmstadtium", "he_him", 281},
 	
-	{111, "Rg", "Roentgenium", "they_them"},
+	{111, "Rg", "Roentgenium", "they_them", 282},
 	
-	{112, "Cn", "Copernicium", "he_she"},
+	{112, "Cn", "Copernicium", "he_she", 285},
 	
-	{113, "Nh", "Nihonium", "she_her"},
+	{113, "Nh", "Nihonium", "she_her", 286},
 	
-	{114, "Fl", "Flerovium", "he_she"},
+	{114, "Fl", "Flerovium", "he_she", 289},
 	
-	{115, "Mc", "Moscovium", "he_they"},
+	{115, "Mc", "Moscovium", "he_they", 290},
 	
-	{116, "Lv", "Livermorium", "she_he"},
+	{116, "Lv", "Livermorium", "she_he", 293},
 	
-	{117, "Ts", "Tennessine", "she_her"},
+	{117, "Ts", "Tennessine", "she_her", 294},
 	
-	{118, "Og", "Oganesson", "he_him"},
+	{118, "Og", "Oganesson", "he_him", 294},
 	
-	{119, "Uue", "Ununennium", "unknown", rarity = 4},
+	{119, "Uue", "Ununennium", "unknown", 297, rarity = 4}, --Idk actually the base mass of Uue and Ubn (but they're theoretical so how much does it matter?)
 	
-	{120, "Ubn", "Unbinilium", "unknown", rarity = 4}
+	{120, "Ubn", "Unbinilium", "unknown", 300, rarity = 4}
 }
 
 SMODS.Atlas({
@@ -294,8 +294,6 @@ local pools = {"ElementCattosCommon", "ElementCattosUncommon", "ElementCattosRar
 
 for k,v in pairs(elements) do
 	local n = v[1] + 1
-	local desc = v[5] or {}
-	table.insert(desc, topuplib.formatText({{"Symbol: "..v[2]..", Atomic number: "..tostring(v[1]), "inactive"}}))
 	if v[4] and CardPronouns and not CardPronouns.badge_types[v[4]] then
 		v[4] = "ecatto_" .. v[4]
 		if not CardPronouns.badge_types[v[4]] then
@@ -309,7 +307,7 @@ for k,v in pairs(elements) do
 		key = "element" .. tostring(v[1]),
 		loc_txt = {
 			name = v[3],
-			text = desc
+			text = {"{C:inactive}Symbol: "..v[2]..", Atomic number: "..tostring(v[1])}
 		},
 		atlas = "elements",
 		pos = {
@@ -328,7 +326,9 @@ for k,v in pairs(elements) do
 		},
 		rarity = v.rarity or 3,
 		config = v.config,
-		loc_vars = v.loc_vars
+		loc_vars = v.loc_vars,
+		calculate = v[4],
+		element_base_mass = v[5]
 	})
 	
 	if v[6] then

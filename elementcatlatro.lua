@@ -11,7 +11,20 @@ elementcattos = {
 		--TODO: localize these currently english-only strings
 		if d.anum then xline[1] = "Atomic number: " .. tostring(d.anum) end
 		if d.sym then xline[#xline + 1] = "Symbol: " .. d.sym end
-		if d.compound then xline[#xline + 1] = "Formula: " .. (elementcattos.compounds[d.compound] and elementcattos.formatFormula(elementcattos.compounds[d.compound][1]) or ("INVALID ("..tostring(d.compound)..")")) end
+		if d.compound then
+			xline[#xline + 1] = "Formula: " .. (elementcattos.compounds[d.compound] and elementcattos.formatFormula(elementcattos.compounds[d.compound][1]) or ("INVALID ("..tostring(d.compound)..")"))
+			--todo: why does this crash?
+			--d.unlock = d.unlock or localize("ecattos_unlock_compound")
+		end
+		if d.extra then
+			if type(d.extra) == "table" then
+				for k,v in ipairs(d.extra) do
+					xline[#xline + 1] = v
+				end
+			else
+				xline[#xline + 1] = d.extra
+			end
+		end
 		if #xline ~= 0 then
 			d.text = d.text or {}
 			d.text[#d.text + 1] = "{C:inactive}" .. table.concat(xline, ", ")
@@ -45,7 +58,7 @@ elementcattos = {
 	atomicnumber = {},
 	tools = {},
 	cardFromMod = function(card)
-		return card.config.center.original_mod.id == SMODS.Mods.ElementCatlatro.id
+		return card.config.center and card.config.center.original_mod and card.config.center.original_mod.id == SMODS.Mods.ElementCatlatro.id
 	end,
 	modsupported = { -- Keys of jokers to consider "part of Element Catlatro" for Element Cattos deck
 		j_ecattos_element1 = true

@@ -10,7 +10,11 @@ return {
 			ecattos_fusion_negative = "Negative Edition",
 			ecattos_fusion_none = "None",
 			ecattos_fission_none = "None",
-			ecattos_recipe_name_stone_cards = "6 Stone Cards"
+			ecattos_recipe_name_stone_cards = "6 Stone Cards",
+			ecattos_unlock_compound = {
+				"Form this using",
+				"Compound Creator"
+			}
 		}
 	},
 	descriptions = {
@@ -48,8 +52,17 @@ return {
 					"{_A:attention:1/12th} of scored {C:mult}Mult{}",
 					"{_A:currentchips:+#1#}"
 				},
-				anum = 2,
-				sym = "He"
+				anum = 3,
+				sym = "Li"
+			},
+			j_ecattos_element4 = elementcattos.loc_txt {
+				name = "Beryllium",
+				text = {
+					"{_A:mult:+1.5} per scored",
+					"card with an {C:dark_edition}edition{}"
+				},
+				anum = 4,
+				sym = "Be"
 			},
 			j_ecattos_element5 = elementcattos.loc_txt {
 				name = "Boron",
@@ -69,6 +82,15 @@ return {
 				},
 				anum = 6,
 				sym = "C"
+			},
+			j_ecattos_element7 = elementcattos.loc_txt {
+				name = "Nitrogen",
+				text = {
+					"{_A:chips:+15} per unique",
+					"suit in scoring hand"
+				},
+				anum = 7,
+				sym = "N"
 			},
 			j_ecattos_element8 = elementcattos.loc_txt {
 				name = "Oxygen",
@@ -96,12 +118,42 @@ return {
 				anum = 14,
 				sym = "Si"
 			},
+			j_ecattos_element15 = elementcattos.loc_txt {
+				name = "Phosphorus",
+				text = {
+					"When sold, all cards held",
+					"in hand permenantly gain {_A:mult:+0.2}",
+					"for each round played this run",
+					"{_A:currentmult:+0}"
+				},
+				anum = 15,
+				sym = "P"
+			},
+			j_ecattos_element16 = elementcattos.loc_txt {
+				name = "Sulfur",
+				text = {
+					"{_A:mult:+24} after an explosion",
+					"{C:inactive}(Inactive)",
+					"Resets when Boss Blind is defeated"
+				},
+				anum = 16,
+				sym = "S"
+			},
+			j_ecattos_element27 = elementcattos.loc_txt {
+				name = "Cobalt",
+				text = {
+					"Every played {C:attention}card{} permenantly",
+					"gains {_A:chips:+3} when scored"
+				},
+				anum = 27,
+				sym = "Co"
+			},
 			j_ecattos_element28 = elementcattos.loc_txt {
 				name = "Nickel",
 				text = {
-					"Earn {_A:money:2} at end of round",
-					"Payout increases by {_A:money:1}",
-					"when Boss Blind is defeated"
+					"Earn {_A:money:2} at end of round,",
+					"plus {_A:money:1} for each Ante",
+					"{_A:currentmoney:2}"
 				},
 				anum = 28,
 				sym = "Ni"
@@ -115,6 +167,26 @@ return {
 				},]]
 				anum = 33,
 				sym = "As"
+			},
+			j_ecattos_element60 = elementcattos.loc_txt {
+				name = "Neodymium",
+				text = {
+					"{C:green}1 in 2{} chance to retrigger",
+					"{C:attention}Steel Cards{} held in hand"
+				},
+				anum = 60,
+				sym = "Nd"
+			},
+			j_ecattos_element63 = elementcattos.loc_txt {
+				name = "Europium",
+				text = {
+					"{_A:mult:+6} per scored",
+					"card of {_A:hearts} suit",
+					"Wild Cards also give",
+					"{_A:chips:+10}"
+				},
+				anum = 63,
+				sym = "Eu"
 			},
 			j_ecattos_element79 = elementcattos.loc_txt {
 				name = "Gold",
@@ -137,8 +209,8 @@ return {
 			j_ecattos_element95 = elementcattos.loc_txt {
 				name = "Americium",
 				text = {
-					"{_A:xmult:#1#} if scored hand contains",
-					"{_A:clubs}, {_A:hearts}, and no other suits"
+					"{_A:xmult:#1#} if {C:attention}scored hand{} contains",
+					"{_A:clubs:Clubs}, {_A:hearts:Hearts}, and no other suits"
 				},
 				anum = 95,
 				sym = "Am"
@@ -205,6 +277,25 @@ return {
 				anum = "Omega",
 				sym = "N/A"
 			},
+			--Subatomic particles
+			j_ecattos_neutron = elementcattos.loc_txt {
+				name = "Neutron",
+				text = {
+					"{C:attention}Use{} to add to {C:attention}1{}",
+					"selected Element Catto",
+					"{C:inactive}+1 Joker slot"
+				},
+				extra = "Subatomic particle"
+			},
+			j_ecattos_electron = elementcattos.loc_txt {
+				name = "Electron",
+				text = {
+					"{C:attention}Use{} to add to {C:attention}1{}",
+					"selected Element Catto",
+					"{C:inactive}+1 Joker slot"
+				},
+				extra = "Subatomic particle"
+			},
 			--Compounds
 			j_ecattos_compound_water = elementcattos.loc_txt {
 				name = "Water",
@@ -233,6 +324,23 @@ return {
 					"scored Stone Card"
 				},
 				compound = "silica"
+			},
+			j_ecattos_compound_magnetite = elementcattos.loc_txt {
+				name = "Magnetite",
+				text = {
+					"{C:attention}Steel Cards{} are",
+					"always drawn first"
+				},
+				compound = "magnetite"
+			},
+			j_ecattos_compound_neodymium_magnet = elementcattos.loc_txt {
+				name = "Neodymium Magnet",
+				text = {
+					"{C:green}1 in 4{} chance for each base",
+					"edition {C:attention}Steel Card{} held",
+					"in hand to become {C:dark_edition}Negative{}"
+				},
+				compound = "neodymium_magnet"
 			}
 		},
 		Tarot = {
@@ -336,6 +444,19 @@ return {
 				text = {
 					"Select {C:attention}1{} of {C:attention}4{} {C:tarot}Tools{}",
 					"to use immediately"
+				}
+			},
+			ecattos_radioactive = {
+				name = "Radioactive",
+				text = {
+					"Decays in {C:attention}#1#{} hands"
+				}
+			},
+			ecattos_radioactive_explodes = {
+				name = "Radioactive",
+				text = {
+					"Decays in {C:attention}#1#{} hands",
+					"{C:red}Explodes{} upon decay"
 				}
 			}
 		},
