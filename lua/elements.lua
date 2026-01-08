@@ -284,7 +284,7 @@ local inpool = function(self)
 	for k,v in pairs(G.jokers.cards) do
 		if v.config.center_key == self.key then count = count + 1 end
 	end
-	local percent = count / G.joker.config.card_limit
+	local percent = count / G.jokers.config.card_limit
 	local dups = true
 	if self.rarity >= 4 then
 		dups = false
