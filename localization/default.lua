@@ -14,7 +14,8 @@ return {
 			ecattos_unlock_compound = {
 				"Form this using",
 				"Compound Creator"
-			}
+			},
+			ecattos_neil = "Neil"
 		}
 	},
 	descriptions = {
@@ -277,6 +278,12 @@ return {
 				anum = "Omega",
 				sym = "N/A"
 			},
+			j_ecattos_garbage = {
+				name = "Garbage",
+				text = {
+					"{C:inactive}Oops...{}"
+				}
+			},
 			--Subatomic particles
 			j_ecattos_neutron = elementcattos.loc_txt {
 				name = "Neutron",
@@ -292,6 +299,14 @@ return {
 				text = {
 					"{C:attention}Use{} to add to {C:attention}1{}",
 					"selected Element Catto",
+					"{C:inactive}+1 Joker slot"
+				},
+				extra = "Subatomic particle"
+			},
+			j_ecattos_photon = elementcattos.loc_txt {
+				name = "Photon",
+				text = {
+					"i dunno man",
 					"{C:inactive}+1 Joker slot"
 				},
 				extra = "Subatomic particle"
@@ -415,6 +430,19 @@ return {
 					"{_A:attention:1} selected Element Catto",
 					"{_A:musthaveroom}"
 				}
+			},
+			c_ecattos_stabilizer = {
+				name = "Stabilizer",
+				text = topuplib.asub {
+					"Pauses {_A:attention:1} selected Element Catto's",
+					"radioactive decay for {C:attention}+2{} rounds"
+				}
+			},
+			c_ecattos_lightbulb = {
+				name = "Lightbulb",
+				text = {
+					"i dont know"
+				}
 			}
 		},
 		Other = {
@@ -458,7 +486,14 @@ return {
 					"Decays in {C:attention}#1#{} hands",
 					"{C:red}Explodes{} upon decay"
 				}
-			}
+			},
+            ecattos_stabilized={
+                name="Stabilized",
+                text={
+                    "Radioactive decay is",
+                    "paused for {C:attention}#1#{} rounds",
+                },
+            }
 		},
 		Back = {
 			b_ecattos_elements = {

@@ -25,6 +25,15 @@ SMODS.Joker {
     pixel_size = { w = 26, h = 26 }
 }
 
+SMODS.Joker {
+	key = "photon",
+	atlas = "special",
+	rarity = 1,
+	pos = {x = 1, y = 1},
+	in_pool = topuplib.returnFalse,
+    pixel_size = { w = 26, h = 26 }
+}
+
 --Cattos
 
 SMODS.Joker {
@@ -70,3 +79,20 @@ SMODS.Joker {
 		return {vars = {aaa, bbb}}
 	end,
 }
+
+-- if a state change or deletion should happen, but eternal prevents it from fully completing,
+-- you should get garbage instead
+elementcattos.garbage = SMODS.Joker {
+	key = "garbage",
+	pronouns = "it_its",
+	atlas = "special",
+	rarity = 1,
+	pos = {x = 0, y = 1},
+	in_pool = topuplib.returnFalse,
+	no_collection = true,
+	discovered = true
+}
+
+elementcattos.becomeGarbage = function(card)
+	card:set_ability(elementcattos.garbage)
+end

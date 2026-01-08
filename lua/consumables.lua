@@ -170,6 +170,29 @@ if topuplib.debug then
 		end,
 		use = function() end
 	}.key)
+	
+	table.insert(elementcattos.tools, SMODS.Consumable {
+		key = "stabilizer",
+		set = "Tarot",
+		atlas = "tools",
+		pos = {x = 0, y = 1},
+		can_use = function()
+			return #G.jokers.highlighted == 1 and elementcattos.cardFromMod(G.jokers.highlighted[1])
+		end,
+		use = function()
+			G.jokers.highlighted[1].ability.ecattos_stabilized = (G.jokers.highlighted[1].ability.ecattos_stabilized or 0) + 2
+		end
+	}.key)
+	
+	table.insert(elementcattos.tools, SMODS.Consumable {
+		key = "lightbulb",
+		set = "Tarot",
+		atlas = "tools",
+		pos = {x = 1, y = 1},
+		can_use = function()
+			return false
+		end
+	}.key)
 end
 
 table.insert(elementcattos.tools, SMODS.Consumable {
@@ -202,7 +225,15 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 		return #G.jokers.highlighted == 1 and elementcattos.cardFromMod(G.jokers.highlighted[1])
 	end,
 	use = function()
-		G.jokers.highlighted[1]:start_dissolve()
+		local card = G.jokers.highlighted[1]
+		if card.ability.entr_aleph or card.ability.cry_absolute then
+			local aleph_bypass = card.ability.bypass_aleph
+			card.ability.bypass_aleph = true
+			elementcattos.becomeGarbage(card)
+			card.ability.bypass_aleph = aleph_bypass
+			return
+		end
+		card:start_dissolve()
 	end
 }.key)
 
@@ -210,7 +241,8 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 	key = "compoundcreator",
 	set = "Tarot",
 	atlas = "tools",
-	pos = {x = 7, y = 0},
+	pos = {x = 7, y = 1},
+	soul_pos = {x = 6, y = 1},
 	config = { extra = { ready = true } },
 	can_use = topuplib.returnTrue,
 	keep_on_use = function(self, card)

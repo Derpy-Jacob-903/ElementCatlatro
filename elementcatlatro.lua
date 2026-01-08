@@ -55,6 +55,25 @@ elementcattos = {
 		return math.floor((math.log(n) * 0.999) + (n * 0.001))
 	end,
 	--Cards
+	defaultJokerCalculate = function(self, card, context)
+		if context.joker_main and card.ability.extra then
+			return {
+				mult = card.ability.extra.mult,
+				chips = card.ability.extra.chips,
+				Xmult = card.ability.extra.xmult,
+				Xchips = card.ability.extra.xchips
+			}
+		end
+	end,
+	simpleLocVars = function(properties)
+		local prop_vars = ""
+		for k,v in ipairs(properties) do
+			prop_vars = prop_vars .. "c.ability.extra." .. v .. ","
+		end
+		return assert(loadstring([[
+			return function(a,b,c) if not c.ability.extra then return end return {vars = {]]..prop_vars..[[}} end
+		]]), "simpleLocTxt failed")()
+	end,
 	atomicnumber = {},
 	tools = {},
 	cardFromMod = function(card)
@@ -201,7 +220,8 @@ local rq = {
 	"compounds_extra_recipes",
 	"decks",
 	"boosters",
-	"special"
+	"special",
+	"sticker_stabilized"
 }
 
 --Pronouns
@@ -368,6 +388,13 @@ SMODS.Sound {
 		return G.OVERLAY_MENU and topuplib.music == "ecattos"
 	end
 }
+
+SMODS.Atlas({
+	key = "modifiers",
+	path = "modifiers.png",
+	px = 71,
+	py = 95
+})
 
 for i, v in ipairs(rq) do
 	local a = assert(SMODS.load_file("lua/"..v..".lua"))()

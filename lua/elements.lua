@@ -22,37 +22,25 @@ local elements = {
 	--Atomic number, Symbol, Name, Pronouns, Base Mass, Calculate
 	{0, "Mu", "Muonium", "hse_ehr", 0, rarity = 3},
 	
-	{1, "H", "Hydrogen", "she_her", 1, rarity = 1, config = { extra = {chips = 25} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips } }
-    end},
+	{1, "H", "Hydrogen", "she_her", 1, rarity = 1, config = { extra = {chips = 25} }, loc_vars = {"chips"}},
 	
-	{2, "He", "Helium", "he_him", 4, rarity = 1, config = { extra = {mult = 2.5} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult } }
-    end},
+	{2, "He", "Helium", "he_him", 4, rarity = 1, config = { extra = {mult = 2.5} }, loc_vars = {"mult"}},
 	
-	{3, "Li", "Lithium", "he_him", 7, rarity = 2, config = { extra = {chips = 0} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips } }
-    end},
+	{3, "Li", "Lithium", "he_him", 7, rarity = 2, config = { extra = {chips = 0} }, loc_vars = {"chips"}},
 	
 	{4, "Be", "Beryllium", "she_her", 9},
 	
 	{5, "B", "Boron", "he_him", 11, rarity = 3},
 	
-	{6, "C", "Carbon", "he_him", 12, rarity = 1, config = { extra = {xchips = 1.15} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xchips } }
-    end},
+	{6, "C", "Carbon", "he_him", 12, rarity = 1, config = { extra = {xchips = 1.15} }, loc_vars = {"xchips"}},
 	
 	{7, "N", "Nitrogen", "she_her", 14, rarity = 1},
 	
-	{8, "O", "Oxygen", "she_her", 16, rarity = 1, config = { extra = {chips = 10, mult = 0.5} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
-    end},
+	{8, "O", "Oxygen", "she_her", 16, rarity = 1, config = { extra = {chips = 10, mult = 0.5} }, loc_vars = {"chips", "mult"}},
 	
 	{9, "F", "Fluorine", "she_her", 19, rarity = 2},
 	
-	{10, "Ne", "Neon", "she_her", 20, rarity = 1, config = { extra = {xmult = 1.5} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult } }
-    end},
+	{10, "Ne", "Neon", "she_her", 20, rarity = 1, config = { extra = {xmult = 1.5} }, loc_vars = {"xmult"}},
 	
 	{11, "Na", "Sodium", "he_him", 23, rarity = 1},
 	
@@ -60,9 +48,7 @@ local elements = {
 	
 	{13, "Al", "Aluminium", "he_him", 27, rarity = 1},
 	
-	{14, "Si", "Silicon", "he_him", 28, rarity = 1, config = { extra = {more = 1} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.more } }
-    end},
+	{14, "Si", "Silicon", "he_him", 28, rarity = 1, config = { extra = {more = 1} }, loc_vars = {"more"}},
 	
 	{15, "P", "Phosphorus", "he_him", 31, rarity = 1},
 	
@@ -88,7 +74,16 @@ local elements = {
 	
 	{26, "Fe", "Iron", "he_him", 56, rarity = 1},
 	
-	{27, "Co", "Cobalt", "he_him", 59, rarity = 1},
+	{27, "Co", "Cobalt", "he_him", 59, function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+            context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus or 0
+            context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra.chips
+            return {
+                extra = { message = localize('k_upgrade_ex'), colour = G.C.CHIPS },
+                card = card
+            }
+        end
+    end, rarity = 1, config = { extra = {chips = 3} }, loc_vars = {"chips"}},
 	
 	{28, "Ni", "Nickel", "he_him", 58, rarity = 1},
 	
@@ -224,9 +219,7 @@ local elements = {
 	
 	{94, "Pu", "Plutonium", "he_any", 244},
 	
-	{95, "Am", "Americium", "ecatto_eaglenoise_any", 243, config = { extra = {xmult = 3} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult } }
-    end},
+	{95, "Am", "Americium", "ecatto_eaglenoise_any", 243, config = { extra = {xmult = 3} }, loc_vars = {"xmult"}},
 	
 	{96, "Cm", "Curium", "she_her", 250},
 	
@@ -287,7 +280,25 @@ SMODS.Atlas({
 })
 
 local inpool = function(self)
-	return self.atomic_number ~= 0, {allow_duplicates = true}
+	local count = 0
+	for k,v in pairs(G.jokers.cards) do
+		if v.config.center_key == self.key then count = count + 1 end
+	end
+	local percent = count / G.joker.config.card_limit
+	local dups = true
+	if self.rarity >= 4 then
+		dups = false
+		if pseudorandom("ecatto_spawnrate") > 0.75 then return false end
+	else
+		if self.rarity <= 1 then
+			dups = count <= 2 or percent <= 0.38
+		elseif self.rarity == 2 then
+			dups = count <= 2 or percent <= 0.2
+		elseif self.rarity == 3 then
+			dups = (count <= 1 or percent <= 0.1) and pseudorandom("ecatto_spawnrate") > 0.3
+		end
+	end
+	return self.atomic_number ~= 0, {allow_duplicates = dups}
 end
 
 local pools = {"ElementCattosCommon", "ElementCattosUncommon", "ElementCattosRare", "ElementCattosLegendary"}
@@ -299,6 +310,9 @@ for k,v in pairs(elements) do
 		if not CardPronouns.badge_types[v[4]] then
 			print("ElementCatlatro | Not found pronouns for key "..v[4])
 		end
+	end
+	if type(v.loc_vars) == "table" then
+		v.loc_vars = elementcattos.simpleLocVars(v.loc_vars)
 	end
 	--[[if not v.rarity then
 		print("ElementCatlatro | Not defined rarity for "..v[1].." "..v[3])
@@ -327,13 +341,13 @@ for k,v in pairs(elements) do
 		rarity = v.rarity or 3,
 		config = v.config,
 		loc_vars = v.loc_vars,
-		calculate = v[4],
+		calculate = v[6] or elementcattos.defaultJokerCalculate,
 		element_base_mass = v[5]
 	})
 	
-	if v[6] then
+	--[[if v[6] then
 		topuplib.ezcalc(j, v[6])
-	end
+	end]]
 	if not elementcattos.atomicnumber[v[1]] and v[1] > 0 then
 		elementcattos.atomicnumber[v[1]] = j.key
 	end
