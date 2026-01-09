@@ -22,37 +22,65 @@ local elements = {
 	--Atomic number, Symbol, Name, Pronouns, Base Mass, Calculate
 	{0, "Mu", "Muonium", "hse_ehr", 0, rarity = 3},
 	
-
-	{1, "H", "Hydrogen", "she_her", 1, rarity = 1, config = { extra = {chips = 25} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips } }
-    end,
-	calculate = function(self, card, context)
+   --1, 2,   3,          4,         5, 6.
+	{1, "H", "Hydrogen", "she_her", 1, function(self, card, context)
         if context.joker_main then
             return {
                 chips = card.ability.extra.chips
             }
         end
     end,
+	rarity = 1, config = { extra = {chips = 25} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips } }
+    end
 	},
 	
 
-	{2, "He", "Helium", "he_him", 4, rarity = 1, config = { extra = {mult = 2.5} }, loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult } }
-    end,
-	calculate = function(self, card, context)
+	{2, "He", "Helium", "he_him", 4, function(self, card, context)
         if context.joker_main then
             return {
                 mult = card.ability.extra.mult
             }
         end
     end,
+	rarity = 1, config = { extra = {mult = 2.5} }, loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult } }
+    end
 	},
 	
 	{3, "Li", "Lithium", "he_him", 7, rarity = 2, config = { extra = {chips = 0} }, loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
     end},
 	
-	{4, "Be", "Beryllium", "she_her", 9},
+	{4, "Be", "Beryllium", "she_her", 9, function(self, card, context)
+		--this would be worded "Played cards with an edition each give +1.5 Mult"
+        --if context.individual and context.cardarea == G.play then
+			--if context.other_card.edition then
+				--card.ability.extra.count = card.ability.extra.count + 1
+				--return {
+					--mult = card.ability.extra.mult,
+					--colour = G.C.MULT,
+					--card = card,
+				--}
+			--end
+		--end
+		-- +1.5 Mult for each played card with an edition in scoring hand.
+		if context.before then
+            card.ability.extra.count = 0
+            for _, other_card in ipairs(context.scoring_hand) do
+				if other_card.edition then
+					card.ability.extra.count = card.ability.extra.count + 1
+				end
+            end
+        end
+		if context.joker_main then
+			return {
+				mult = card.ability.extra.mult * card.ability.extra.count
+			}
+		end
+	end,
+		config = { extra = {mult = 1.5} }
+	},
 	
 	{5, "B", "Boron", "he_him", 11, rarity = 3},
 	
@@ -345,7 +373,7 @@ for k,v in pairs(elements) do
 		rarity = v.rarity or 3,
 		config = v.config,
 		loc_vars = v.loc_vars,
-		calculate = v[4] or function(self, card, context)
+		calculate = v[6] or v.calculate or function(self, card, context)
 			if G.GAME.selected_back.effect.center.key == 'b_ecattos_elements' then
 				if context.joker_main then
 					if v.rarity == 1 then
@@ -371,11 +399,10 @@ for k,v in pairs(elements) do
 					end
 				end
 			end
-		end
-		element_base_mass = v[5]
+		end,
 	})
-	if v[6] then
-		topuplib.ezcalc(j, v[6])
+	if v[6] and topuplib.ezcalc then
+		topuplib.ezcalc(j, v[6]) -- what does this even do.
 	end
 	if not elementcattos.atomicnumber[v[1]] and v[1] > 0 then
 		elementcattos.atomicnumber[v[1]] = j.key
