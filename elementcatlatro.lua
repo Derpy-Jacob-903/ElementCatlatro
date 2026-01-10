@@ -220,6 +220,7 @@ local rq = {
 	"compounds_extra_recipes",
 	"decks",
 	"boosters",
+	"sleeves",
 	"special",
 	"sticker_stabilized"
 }

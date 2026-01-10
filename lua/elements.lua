@@ -28,7 +28,15 @@ local elements = {
 	
 	{3, "Li", "Lithium", "he_him", 7, rarity = 2, config = { extra = {chips = 0} }, loc_vars = {"chips"}},
 	
-	{4, "Be", "Beryllium", "she_her", 9},
+	{4, "Be", "Beryllium", "she_her", 9, function(self, card, context)
+		if context.individual and context.cardarea == G.play and context.other_card.edition then
+            return {
+                mult = card.ability.extra.mult, --attempt to index field 'extra' (a nil value)
+                colour = G.C.MULT,
+                card = card,
+            }
+        end
+    end, config = { extra = {mult = 1.5} }, loc_vars = {"mult"}},
 	
 	{5, "B", "Boron", "he_him", 11, rarity = 3},
 	

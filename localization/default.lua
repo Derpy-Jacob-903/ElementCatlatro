@@ -59,7 +59,7 @@ return {
 			j_ecattos_element4 = elementcattos.loc_txt {
 				name = "Beryllium",
 				text = {
-					"{_A:mult:+1.5} per scored",
+					"{_A:mult:+#1#} per scored",
 					"card with an {C:dark_edition}edition{}"
 				},
 				anum = 4,
@@ -284,6 +284,15 @@ return {
 					"{C:inactive}Oops...{}"
 				}
 			},
+			j_ecattos_yomium = elementcattos.loc_txt {
+				name = "Yomium",
+				text = {
+					"Copies ability of first",
+					"{C:attention}Element Catto{} to the right",
+				},
+				anum = "{5}",
+				sym = "Ym"
+			},
 			--Subatomic particles
 			j_ecattos_neutron = elementcattos.loc_txt {
 				name = "Neutron",
@@ -506,6 +515,25 @@ return {
 					"and {C:attention}Overstock Plus{}"
 				}
 			}
-		}
-	}
+		},
+        Sleeve = {
+            sleeve_ecattos_elements = {
+                name = "Element Cattos Sleeve",
+				text = topuplib.asub {
+					"Only Jokers from {C:attention}Element",
+					"{C:attention}Catlatro{} may appear",
+					"{C:attention}+24{} Joker slots",
+					"Start with additional {_A:money:8}",
+					"and {C:attention}Overstock Plus{}"
+				}
+            },
+            sleeve_ecattos_elements_alt = {
+                name = "Element Cattos Sleeve",
+				text = topuplib.asub {
+					"{C:tarot}Tool{} and {C:attention}Element{} Packs both have",
+                    "{C:attention}2{} extra options to choose from",
+				}
+            },
+        }
+    }
 }
