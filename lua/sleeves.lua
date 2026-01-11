@@ -27,7 +27,7 @@ if CardSleeves then
 			return { key = keys, voucher = vouchers, hand_size = hand_sizes, more_options = more_optionss }
 		end,
 		trigger_effect = function(self, args) end,
-		apply = function(self)
+		apply = function(self, sleeve)
 			if not G.GAME.selected_back.effect.center.key == 'b_ecattos_elements' then
 				for k,v in pairs(G.P_CENTERS) do
 					if v.set == "Joker" and not (elementcattos.modsupported[v.key] or (v.original_mod and v.original_mod.id == "ElementCatlatro")) then
@@ -35,15 +35,18 @@ if CardSleeves then
 					end
 				end
 				G.GAME.starting_params.ecattos_deck = true
+				CardSleeves.Sleeve.apply(self, sleeve)
 			end
 		end, 
 		calculate = function(self, sleeve, context)
-			if context.create_card and context.card then
-				local card = context.card
-				local is_booster_pack = card.ability.set == "Booster"
-				local is_catto_pack = is_booster_pack and card.config.center.key:find("p_ecattos_element_")
-				if is_catto_pack and sleeve.config.more_options then
-					card.ability.extra = card.ability.extra + sleeve.config.more_options
+			if G.GAME.selected_back.effect.center.key == 'b_ecattos_elements' then
+				if context.create_card and context.card then
+					local card = context.card
+					local is_booster_pack = card.ability.set == "Booster"
+					local is_catto_pack = is_booster_pack and card.config.center.key:find("p_ecattos_element_")
+					if is_catto_pack and sleeve.config.more_options then
+						card.ability.extra = card.ability.extra + sleeve.config.more_options
+					end
 				end
 			end
 		end

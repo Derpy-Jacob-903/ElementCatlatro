@@ -293,6 +293,16 @@ return {
 				anum = "{5}",
 				sym = "Ym"
 			},
+			j_ecattos_element118fake = elementcattos.loc_txt {
+				name = "Ninovium",
+				text = {
+					"x2 {C:mult}Mult{}",
+					"x0.5 {C:chips}Chips{}",
+					"{C:inactive}dislikes balancing Chips and Mult...{}"
+				},
+				anum = 118,
+				sym = "Nv"
+			},
 			--Subatomic particles
 			j_ecattos_neutron = elementcattos.loc_txt {
 				name = "Neutron",
