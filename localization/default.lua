@@ -3,10 +3,18 @@ return {
 		dictionary = {
 			ecattos_compoundcreator_tocreate = "Compound to create",
 			ecattos_compoundcreator_confirm = "Confirm",
+			
+			ecattos_endedworld = {
+				"The element was so dense,",
+				"that the world was destroyed..."
+			},
+			ecattos_endedworld_confirm = "Oh :(",
+			
 			k_booster_group_p_ecattos_element_common = "Elements Pack",
 			k_booster_group_p_ecattos_element_uncommon = "Elements Pack",
 			k_booster_group_p_ecattos_element_rare = "Elements Pack",
 			k_booster_group_p_ecattos_element_tools = "Tools Pack",
+			
 			ecattos_fusion_negative = "Negative Edition",
 			ecattos_fusion_none = "None",
 			ecattos_fission_none = "None",
@@ -15,7 +23,14 @@ return {
 				"Form this using",
 				"Compound Creator"
 			},
-			ecattos_neil = "Neil"
+			
+			ecattos_neil = "Neil",
+			
+			ecattos_ds_screen_train = "ZÜGE",
+			ecattos_ds_screen_hi = "HI #1#",
+			ecattos_ds_screen_dragged = "HAI :3",
+			ecattos_ds_screen_explode = "!?!?!",
+			ecattos_ds_screen_bye = "BYE :3",
 		}
 	},
 	descriptions = {
@@ -290,7 +305,8 @@ return {
 				text = {
 					"{C:attention}Use{} to add to {C:attention}1{}",
 					"selected Element Catto",
-					"{C:inactive}+1 Joker slot"
+					"{C:inactive}+1 Joker slot",
+					"{C:inactive}(Vanishes after {C:attention}#1#{C:inactive} rounds)"
 				},
 				extra = "Subatomic particle"
 			},
@@ -299,15 +315,19 @@ return {
 				text = {
 					"{C:attention}Use{} to add to {C:attention}1{}",
 					"selected Element Catto",
-					"{C:inactive}+1 Joker slot"
+					"{C:inactive}+1 Joker slot",
+					"{C:inactive}(Vanishes after {C:attention}#1#{C:inactive} rounds)"
 				},
 				extra = "Subatomic particle"
 			},
 			j_ecattos_photon = elementcattos.loc_txt {
 				name = "Photon",
 				text = {
-					"i dunno man",
-					"{C:inactive}+1 Joker slot"
+					"Has specific interactions",
+					"with certain Element Cattos",
+					"(Check tooltips of valid targets)",
+					"{C:inactive}+1 Joker slot",
+					"{C:inactive}(Vanishes after {C:attention}#1#{C:inactive} rounds)"
 				},
 				extra = "Subatomic particle"
 			},
@@ -492,6 +512,12 @@ return {
                 text={
                     "Radioactive decay is",
                     "paused for {C:attention}#1#{} rounds",
+                },
+            },
+            ecattos_photon_light_fuse={
+                name="Interaction with Photon",
+                text={
+                    "Lights fuse"
                 },
             }
 		},
