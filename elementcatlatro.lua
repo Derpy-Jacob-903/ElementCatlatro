@@ -99,6 +99,17 @@ elementcattos = {
 	fallbacks = {
 		"j_ecattos_element1", "j_ecattos_element2", "j_ecattos_element6", "j_ecattos_element8"
 	},
+	countJokers = function(key, isotope)
+		--TODO: implement isotope lol
+		-- (to, if specified, check if the joker is the right isotope)
+		local result = 0
+		for k,v in pairs(G.jokers.cards) do
+			if key == v.config.center_key then
+				result = result + 1
+			end
+		end
+		return result
+	end,
 	--Compounds
 	compounds = {},
 	formatFormula = function(formula, method)
@@ -221,7 +232,8 @@ local rq = {
 	"decks",
 	"boosters",
 	"special",
-	"sticker_stabilized"
+	"sticker_stabilized",
+	"patches"
 }
 
 --Pronouns

@@ -287,8 +287,9 @@ local inpool = function(self)
 	local percent = count / G.jokers.config.card_limit
 	local dups = true
 	if self.rarity >= 4 then
-		dups = false
-		if pseudorandom("ecatto_spawnrate") > 0.75 then return false end
+		local purrcentcount = countJokers("j_ecattos_purrcent")
+		dups = purrcentcount >= 1 + (percent * 4)
+		if pseudorandom("ecatto_spawnrate") > 0.75 then return purrcentcount >= 2 end
 	else
 		if self.rarity <= 1 then
 			dups = count <= 2 or percent <= 0.38
