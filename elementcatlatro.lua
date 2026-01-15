@@ -102,6 +102,7 @@ elementcattos = {
 	countJokers = function(key, isotope)
 		--TODO: implement isotope lol
 		-- (to, if specified, check if the joker is the right isotope)
+		if not G.jokers then return 0 end
 		local result = 0
 		for k,v in pairs(G.jokers.cards) do
 			if key == v.config.center_key then
@@ -321,6 +322,7 @@ if CardPronouns then
 end
 
 topuplib.addFontOption("Century Schoolbook", "lua/fonts/centuryschoolbook")
+topuplib.addDebugCollectionItem("c_ecattos_stabilizer")
 
 local meme = topuplib.createFallbackPoolItem
 topuplib.createFallbackPoolItem = function(type, pool)
@@ -422,10 +424,12 @@ elementcattos.booster_pools = {
 
 for k,v in pairs(SMODS.Centers) do
 	if v.original_mod and v.original_mod.id == SMODS.current_mod.id then
-		if v.set == "Joker" then
-			table.insert(elementcattos.booster_pools[v.rarity], v.key)
-		elseif v.set == "Tarot" then
-			table.insert(elementcattos.booster_pools.tool, v.key)
+		if not v.not_in_booster then
+			if v.set == "Joker" then
+				table.insert(elementcattos.booster_pools[v.rarity], v.key)
+			elseif v.set == "Tarot" then
+				table.insert(elementcattos.booster_pools.tool, v.key)
+			end
 		end
 	end
 end
