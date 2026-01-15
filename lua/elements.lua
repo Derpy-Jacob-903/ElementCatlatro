@@ -281,13 +281,15 @@ SMODS.Atlas({
 
 local inpool = function(self)
 	local count = 0
-	for k,v in pairs(G.jokers.cards) do
-		if v.config.center_key == self.key then count = count + 1 end
+	if G.jokers then
+		for k,v in pairs(G.jokers.cards) do
+			if v.config.center_key == self.key then count = count + 1 end
+		end
 	end
 	local percent = count / G.jokers.config.card_limit
 	local dups = true
 	if self.rarity >= 4 then
-		local purrcentcount = countJokers("j_ecattos_purrcent")
+		local purrcentcount = elementcattos.countJokers("j_ecattos_purrcent")
 		dups = purrcentcount >= 1 + (percent * 4)
 		if pseudorandom("ecatto_spawnrate") > 0.75 then return purrcentcount >= 2 end
 	else
