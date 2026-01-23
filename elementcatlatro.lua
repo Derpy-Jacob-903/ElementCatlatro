@@ -36,7 +36,9 @@ elementcattos = {
 			unlock = d.unlock
 		}
 	end,
-	loc_txt_planet = topuplib.returnFalse,
+	loc_txt_planet = function(d)
+		return {name = d.name}
+	end,
 	--Radioactive
 	isRadioactive = function(card)
 		return elementcattos.radioactive(card.config.center.key) ~= nil
@@ -237,7 +239,7 @@ local rq = {
 	"special",
 	"sticker_stabilized",
 	"patches",
-	SMODS.find_mod("Blindside") and "blindside/bs_main" or nil
+	BLINDSIDE and "blindside/bs_main" or nil
 }
 
 --Pronouns
