@@ -3,8 +3,9 @@
 
 local mod = SMODS.current_mod
 local config = mod.config
+--anticheat? okay
+local legitimate = topuplib.debug and {titin = true, titin_recipe = {}} or nil
 elementcattos = {
-	loc_txt_amatch_pattern = "%{_A[^%}]+%}",
 	loc_txt = function(d)
 		d.text = d.text and topuplib.asub(d.text) or nil
 		local xline = {}
@@ -35,6 +36,7 @@ elementcattos = {
 			unlock = d.unlock
 		}
 	end,
+	loc_txt_planet = topuplib.returnFalse,
 	--Radioactive
 	isRadioactive = function(card)
 		return elementcattos.radioactive(card.config.center.key) ~= nil
@@ -234,7 +236,8 @@ local rq = {
 	"boosters",
 	"special",
 	"sticker_stabilized",
-	"patches"
+	"patches",
+	SMODS.find_mod("Blindside") and "blindside/bs_main" or nil
 }
 
 --Pronouns
@@ -411,7 +414,14 @@ SMODS.Atlas({
 })
 
 for i, v in ipairs(rq) do
-	local a = assert(SMODS.load_file("lua/"..v..".lua"))()
+	if v then
+		local a = assert(SMODS.load_file("lua/"..v..".lua"))()
+		if type(a) == "function" then
+			a({
+				legitimate = legitimate
+			})
+		end
+	end
 end
 
 elementcattos.booster_pools = {

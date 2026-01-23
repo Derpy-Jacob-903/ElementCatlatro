@@ -31,6 +31,43 @@ return {
 			ecattos_ds_screen_dragged = "HAI :3",
 			ecattos_ds_screen_explode = "!?!?!",
 			ecattos_ds_screen_bye = "BYE :3",
+			
+			ecattos_extended_element_name = function(num, isSymbol) --this is a function, hopefully the game takes this well
+				local dgt = {
+					["0"] = "Nil",
+					["1"] = "Un",
+					["2"] = "Bi",
+					["3"] = "Tri",
+					["4"] = "Quad",
+					["5"] = "Pent",
+					["6"] = "Hex",
+					["7"] = "Sept",
+					["8"] = "Oct",
+					["9"] = "Enn"
+				}
+				local result = ""
+				for v in string.gmatch(num, "%d") do
+					local t = result == "" and dgt[v] or string.lower(dgt[v])
+					result = result .. (isSymbol and string.sub(t, 1, 1) or t)
+				end
+				if isSymbol then
+					return result
+				end
+				if string.sub(result, string.len(result)) == "i" then
+					return result .. "um"
+				end
+				return result .. "ium"
+			end,
+			
+			ecattos_planet_star_of = "Star of #1#",
+			ecattos_planet_moon_of = "Moon of #1#",
+			ecattos_planet_planet_of = "Planet of #1#",
+			ecattos_planet_satellite_of = "Satellite of #1#",
+			ecattos_planet_solarsystem = "the Solar System",
+			
+			ecattos_planet_category_inner_solar = "Inner Solar System",
+			ecattos_planet_category_hoax = "Hoax Object",
+			ecattos_planet_category_outer_solar = "Outer Solar System"
 		}
 	},
 	descriptions = {
@@ -258,6 +295,13 @@ return {
 				anum = 120,
 				sym = "Ubn"
 			},
+			j_ecattos_element_extended = elementcattos.loc_txt {
+				name = "TBA",
+				text = {
+					"If you're reading this,",
+					"something went wrong!"
+				}
+			},
 			--Specials
 			j_ecattos_purrcent = elementcattos.loc_txt {
 				name = "Purrcent",
@@ -376,6 +420,61 @@ return {
 					"in hand to become {C:dark_edition}Negative{}"
 				},
 				compound = "neodymium_magnet"
+			},
+			j_ecattos_compound_titin = elementcattos.loc_txt {
+				name = "Titin",
+				text = {
+					"If {C:important}played hand{} contains at least",
+					"{C:important}5{} cards, {_A:emult:#1#} per scored card"
+				},
+				compound = "titin"
+			},
+			j_ecattos_compound_titin_cheated = {
+				name = "''Titin''",
+				text = {
+					"There are other ways you",
+					"could've have cheated.",
+					"This one... nah.",
+					"{C:inactive,s:0.75}Create a GitHub issue if",
+					"{C:inactive,s:0.75}verdict is incorrect."
+				}
+			},
+			--Blindside
+			j_ecattos_planet_sun = elementcattos.loc_txt_planet {
+				name = "The Sun",
+				text = {
+					"{C:attention}Retrigger{} the first",
+					"Blind of each Hue"
+				}
+			},
+			j_ecattos_planet_earth = elementcattos.loc_txt_planet {
+				name = "Earth",
+				text = {
+					"Create a {_A:bs_mineral} Card",
+					"if played hand contains",
+					"a {_A:bs_green} or {_A:bs_blue} Blind",
+					"with multiple Hues"
+				}
+			},
+			j_ecattos_planet_mercury = elementcattos.loc_txt_planet {
+				name = "Mercury",
+				text = {
+					"text format test",
+					"{_A:bs_red} {_A:bs_green} {_A:bs_blue} {_A:bs_yellow} {_A:bs_purple} {_A:bs_faded}",
+					"{_A:bs_channel} {_A:bs_mineral} {_A:bs_rune} {_A:bs_ritual}"
+				}
+			},
+			j_ecattos_planet_jupiter = elementcattos.loc_txt_planet {
+				name = "Jupiter",
+				text = {
+					""
+				}
+			},
+			j_ecattos_planet_planetx = elementcattos.loc_txt_planet {
+				name = "Planet X",
+				text = {
+					""
+				}
 			}
 		},
 		Tarot = {
@@ -462,6 +561,19 @@ return {
 				name = "Lightbulb",
 				text = {
 					"i dont know"
+				}
+			},
+			c_ecattos_recipe_titin = {
+				name = "Titin Blueprint",
+				text = topuplib.asub {
+					topuplib.txnyi,
+					"{C:important}Use to consume ingredients",
+					"Creates {_A:exotic:Titin} when completed",
+					"{C:inactive}Carbon: #1#/169719",
+					"{C:inactive}Hydrogen: #2#/270466",
+					"{C:inactive}Nitrogen: #3#/45688",
+					"{C:inactive}Oxygen: #4#/52238",
+					"{C:inactive}Sulfur: #5#/911"
 				}
 			}
 		},
