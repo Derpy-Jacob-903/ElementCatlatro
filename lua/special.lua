@@ -80,6 +80,23 @@ SMODS.Joker {
 	end,
 }
 
+SMODS.Joker {
+	key = "element_extended",
+	config = {extra = {atomic_number = 121}},
+	atlas = "elements",
+	rarity = 2,
+	pos = {x = 2, y = 15},
+	no_collection = false,
+	in_pool = topuplib.returnFalse,
+	discovered = true,
+	not_in_booster = true,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {atomic_number = card.ability.extra.atomic_number}
+		}
+	end,
+}
+
 -- if a state change or deletion should happen, but eternal prevents it from fully completing,
 -- you should get garbage instead
 elementcattos.garbage = SMODS.Joker {

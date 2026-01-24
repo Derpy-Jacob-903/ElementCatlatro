@@ -32,7 +32,18 @@ return {
 			ecattos_ds_screen_explode = "!?!?!",
 			ecattos_ds_screen_bye = "BYE :3",
 			
-			ecattos_extended_element_name = function(num, isSymbol) --this is a function, hopefully the game takes this well
+			ecattos_planet_star_of = "Star of #1#",
+			ecattos_planet_moon_of = "Moon of #1#",
+			ecattos_planet_planet_of = "Planet of #1#",
+			ecattos_planet_satellite_of = "Satellite of #1#",
+			ecattos_planet_solarsystem = "the Solar System",
+			
+			ecattos_planet_category_inner_solar = "Inner Solar System",
+			ecattos_planet_category_hoax = "Hoax Object",
+			ecattos_planet_category_outer_solar = "Outer Solar System"
+		},
+		ecattos_extended_element = {
+			name = function(num, isSymbol) --this is a function, hopefully the game takes this well
 				local dgt = {
 					["0"] = "Nil",
 					["1"] = "Un",
@@ -58,16 +69,46 @@ return {
 				end
 				return result .. "ium"
 			end,
-			
-			ecattos_planet_star_of = "Star of #1#",
-			ecattos_planet_moon_of = "Moon of #1#",
-			ecattos_planet_planet_of = "Planet of #1#",
-			ecattos_planet_satellite_of = "Satellite of #1#",
-			ecattos_planet_solarsystem = "the Solar System",
-			
-			ecattos_planet_category_inner_solar = "Inner Solar System",
-			ecattos_planet_category_hoax = "Hoax Object",
-			ecattos_planet_category_outer_solar = "Outer Solar System"
+			effect_chips = {
+				"{C:chips}+#1#{} Chips"
+			},
+			effect_mult = {
+				"{C:mult}+#1#{} Mult"
+			},
+			effect_tarot = {
+				"Create a {C:tarot}Tarot{} card"
+			},
+			effect_spectral = {
+				"Create a {C:spectral}Spectral{} card"
+			},
+			trigger_scored_card = {
+				"#1# per scored card"
+			},
+			trigger_scored_card_suit = {
+				"#1# per scored card of #2# suit"
+			},
+			trigger_held_card = {
+				"#1# per card held in hand"
+			},
+			trigger_held_card_suit = {
+				"#1# per",
+				"card of #2# suit held in hand"
+			},
+			condition_hand = {
+				"#1# if played hand is #2#"
+			},
+			condition_contains_hand = {
+				"#1# if scored hand contains #2#"
+			},
+			break_stabilizer = {
+				"#1# in #2# chance to break",
+				"equipped Stabilizer"
+			},
+			break_stabilizer_eternal = {
+				"#1# in #2# chance to break",
+				"equipped Stabilizer",
+				"and become Eternal"
+			}
 		}
 	},
 	descriptions = {
@@ -296,10 +337,13 @@ return {
 				sym = "Ubn"
 			},
 			j_ecattos_element_extended = elementcattos.loc_txt {
-				name = "TBA",
+				name = "Extended Element",
 				text = {
-					"If you're reading this,",
-					"something went wrong!"
+					"Unfinished.",
+					"This description should be",
+					"replaced via code.",
+					"Intended for atomic numbers",
+					"exceeding 120."
 				}
 			},
 			--Specials
