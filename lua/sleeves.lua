@@ -28,7 +28,7 @@ if CardSleeves then
 		end,
 		trigger_effect = function(self, args) end,
 		apply = function(self, sleeve)
-			if not G.GAME.selected_back.effect.center.key == 'b_ecattos_elements' then
+			if not (G.GAME.selected_back.effect.center.key == 'b_ecattos_elements') then
 				for k,v in pairs(G.P_CENTERS) do
 					if v.set == "Joker" and not (elementcattos.modsupported[v.key] or (v.original_mod and v.original_mod.id == "ElementCatlatro")) then
 						G.GAME.banned_keys[v.key] = true

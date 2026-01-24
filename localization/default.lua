@@ -88,7 +88,9 @@ return {
 				name = "Nitrogen",
 				text = {
 					"{_A:chips:+15} per unique",
-					"suit in scoring hand"
+					"suit in scoring hand",
+					"{C:attention}Wild Cards{} always count",
+					"as an unique suit"
 				},
 				anum = 7,
 				sym = "N"
@@ -168,6 +170,35 @@ return {
 				},]]
 				anum = 33,
 				sym = "As"
+			},
+			j_ecattos_element34 = elementcattos.loc_txt {
+				name = "Selenium",
+				text = {
+					"{C:tarot}The Moon{} additionally enhances",
+					"selected cards to {C:attention}Mult Cards",
+				},
+				anum = 34,
+				sym = "Se"
+			},
+			j_ecattos_element34_alt = elementcattos.loc_txt {
+				name = "Neil",
+				text = {
+					"{C:tarot}The Moon{} additionally enhances",
+					"selected cards to {C:attention}Mult Cards",
+				},
+				anum = 34,
+				sym = "Neil"
+			},
+			j_ecattos_element56 = elementcattos.loc_txt {
+				name = "Barium",
+				--idk -Jacob
+				--[[text = {
+					"{_A:basexmult:#1#}",
+					"After playing a hand,",
+					"discard {C:attention}#1#{} cards from your deck.",
+				},]]
+				anum = 56,
+				sym = "Ba"
 			},
 			j_ecattos_element60 = elementcattos.loc_txt {
 				name = "Neodymium",
@@ -290,17 +321,25 @@ return {
 					"Copies ability of first",
 					"{C:attention}Element Catto{} to the right",
 				},
-				anum = "{5}",
+				--anum = "{5}",
 				sym = "Ym"
+			},
+			j_ecattos_joker = elementcattos.loc_txt {
+				name = "Jimbonium",
+				text = {
+					"+4 {C:mult}Mult{}",
+				},
+				anum = "139", --https://commons.wikimedia.org/wiki/File:Wales_Chem.png lol
+				sym = "JOKER"
 			},
 			j_ecattos_element118fake = elementcattos.loc_txt {
 				name = "Ninovium",
 				text = {
 					"x2 {C:mult}Mult{}",
 					"x0.5 {C:chips}Chips{}",
-					"{C:inactive}dislikes balancing Chips and Mult...{}"
+					"{C:inactive}Explodes when balancing Chips and Mult{}"
 				},
-				anum = 118,
+				anum = "118",
 				sym = "Nv"
 			},
 			--Subatomic particles
