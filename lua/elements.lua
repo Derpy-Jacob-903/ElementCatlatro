@@ -365,14 +365,18 @@ SMODS.Atlas({ --https://github.com/InertSteak/Pokermon/wiki/Creating-Pokermon-Co
 
 local inpool = function(self)
 	local count = 0
-	for k,v in pairs(G.jokers.cards) do
-		if v.config.center_key == self.key then count = count + 1 end
+	local percent = 0
+	if G.jokers then
+		for k,v in pairs(G.jokers.cards) do
+			if v.config.center_key == self.key then count = count + 1 end
+		end
+		percent = count / G.jokers.config.card_limit
 	end
-	local percent = count / G.jokers.config.card_limit
 	local dups = true
 	if self.rarity >= 4 then
-		dups = false
-		if pseudorandom("ecatto_spawnrate") > 0.75 then return false end
+		local purrcentcount = elementcattos.countJokers("j_ecattos_purrcent")
+		dups = purrcentcount >= 1 + (percent * 4)
+		if pseudorandom("ecatto_spawnrate") > 0.75 then return purrcentcount >= 2 end
 	else
 		if self.rarity <= 1 then
 			dups = count <= 2 or percent <= 0.38

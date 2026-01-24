@@ -3,8 +3,9 @@
 
 local mod = SMODS.current_mod
 local config = mod.config
+--anticheat? okay
+local legitimate = topuplib.debug and {titin = true, titin_recipe = {}} or nil
 elementcattos = {
-	loc_txt_amatch_pattern = "%{_A[^%}]+%}",
 	loc_txt = function(d)
 		d.text = d.text and topuplib.asub(d.text) or nil
 		local xline = {}
@@ -34,6 +35,9 @@ elementcattos = {
 			text = d.text,
 			unlock = d.unlock
 		}
+	end,
+	loc_txt_planet = function(d)
+		return {name = d.name}
 	end,
 	--Radioactive
 	isRadioactive = function(card)
@@ -99,6 +103,18 @@ elementcattos = {
 	fallbacks = {
 		"j_ecattos_element1", "j_ecattos_element2", "j_ecattos_element6", "j_ecattos_element8"
 	},
+	countJokers = function(key, isotope)
+		--TODO: implement isotope lol
+		-- (to, if specified, check if the joker is the right isotope)
+		if not G.jokers then return 0 end
+		local result = 0
+		for k,v in pairs(G.jokers.cards) do
+			if key == v.config.center_key then
+				result = result + 1
+			end
+		end
+		return result
+	end,
 	--Compounds
 	compounds = {},
 	formatFormula = function(formula, method)
@@ -222,7 +238,9 @@ local rq = {
 	"boosters",
 	"sleeves",
 	"special",
-	"sticker_stabilized"
+	"sticker_stabilized",
+	"patches",
+	BLINDSIDE and "blindside/bs_main" or nil
 }
 
 --Pronouns
@@ -310,6 +328,7 @@ if CardPronouns then
 end
 
 topuplib.addFontOption("Century Schoolbook", "lua/fonts/centuryschoolbook")
+topuplib.addDebugCollectionItem("c_ecattos_stabilizer")
 
 local meme = topuplib.createFallbackPoolItem
 topuplib.createFallbackPoolItem = function(type, pool)
@@ -398,7 +417,14 @@ SMODS.Atlas({
 })
 
 for i, v in ipairs(rq) do
-	local a = assert(SMODS.load_file("lua/"..v..".lua"))()
+	if v then
+		local a = assert(SMODS.load_file("lua/"..v..".lua"))()
+		if type(a) == "function" then
+			a({
+				legitimate = legitimate
+			})
+		end
+	end
 end
 
 elementcattos.booster_pools = {
@@ -411,10 +437,12 @@ elementcattos.booster_pools = {
 
 for k,v in pairs(SMODS.Centers) do
 	if v.original_mod and v.original_mod.id == SMODS.current_mod.id then
-		if v.set == "Joker" then
-			table.insert(elementcattos.booster_pools[v.rarity], v.key)
-		elseif v.set == "Tarot" then
-			table.insert(elementcattos.booster_pools.tool, v.key)
+		if not v.not_in_booster then
+			if v.set == "Joker" then
+				table.insert(elementcattos.booster_pools[v.rarity], v.key)
+			elseif v.set == "Tarot" then
+				table.insert(elementcattos.booster_pools.tool, v.key)
+			end
 		end
 	end
 end

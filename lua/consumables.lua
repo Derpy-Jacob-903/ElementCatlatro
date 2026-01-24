@@ -1,3 +1,5 @@
+local legitimate
+
 elementcattos.validTransformElement = function(card, allowEternal)
 	return (allowEternal or not SMODS.is_eternal(card)) and card.config.center.atomic_number
 end
@@ -193,6 +195,50 @@ if topuplib.debug then
 			return false
 		end
 	}.key)
+
+	--there should be a better way of doing this
+	local titin_i = {
+		j_ecattos_element6 = true,
+		j_ecattos_element1 = true,
+		j_ecattos_element7 = true,
+		j_ecattos_element8 = true,
+		j_ecattos_element16 = true
+	}
+	table.insert(elementcattos.tools, SMODS.Consumable {
+		key = "recipe_titin",
+		set = "Tarot",
+		atlas = "tools",
+		pos = {x = 7, y = 1}, --let's not make a sprite yet until we know we absolutely need this
+		soul_pos = {x = 6, y = 1},
+		config = { extra = { ready = false, i_instance = 0 } },
+		can_use = topuplib.returnTrue,
+		keep_on_use = function(self, card)
+			return not card.ability.extra.ready
+		end,
+		loc_vars = function(self, info_queue, card)
+			if not card.ability.extra.i_instance then
+				if topuplib.viewedFromCollection(card) then return {vars = {0, 0, 0, 0, 0}} end
+				local i = 0
+				while not legitimate.titin_recipe[i] do
+					i = i + 1
+				end
+				card.ability.extra.i_instance = i
+				legitimate.titin_recipe[i] = {0, 0, 0, 0, 0}
+			end
+			return {vars = legitimate.titin_recipe[card.ability.extra.i_instance]}
+		end,
+		in_pool = function()
+			for v,_ in ipairs(titin_i) do
+				if elementcattos.countJokers(v) >= 50 then return true end
+			end
+			return false
+		end,
+		use = function()
+			for k,v in pairs(G.jokers.cards) do
+				--if 
+			end
+		end
+	}.key)
 end
 
 table.insert(elementcattos.tools, SMODS.Consumable {
@@ -250,3 +296,7 @@ table.insert(elementcattos.tools, SMODS.Consumable {
 	end,
 	use = elementcattos.ui_compound_creator
 }.key)
+
+return function(t)
+	legitimate = t.legitimate
+end

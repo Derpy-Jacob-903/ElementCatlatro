@@ -1,3 +1,5 @@
+local legitimate
+
 local compounds = {
 	{
 		id = "water",
@@ -58,6 +60,28 @@ local compounds = {
 				end
 			end
 		end
+	},
+	{
+		id = "titin",
+		pronouns = "he_they",
+		formula = {{"C", 169719}, {"H", 270446}, {"N", 45688}, {"O", 52238}, {"S", 911}},
+		rarity = (SMODS.find_mod("Talisman") and Cryptid) and "cry_exotic" or 4,
+		cost = 500000,
+		config = {extra = {emult = 3}},
+		loc_vars = function(self, info_queue, card)
+			--return { vars = { card.ability.extra.emult }}
+			return { vars = { legitimate.titin }}
+		end,
+		calculate = function(self, card, context)
+			if not legitimate.titin then return end
+			--todo: fix conditional
+			if context.joker_main then
+				return {Emult = card.ability.extra.emult}
+			end
+		end,
+		--no_collection = Cryptid ~= nil,
+		in_pool = topuplib.returnFalse,
+		not_in_booster = true
 	}
 }
 
@@ -93,7 +117,13 @@ for k,v in ipairs(compounds) do
 		in_pool = inpool,
 		config = v.config,
 		loc_vars = v.loc_vars,
-		calculate = v.calculate
+		calculate = v.calculate,
+		no_collection = v.no_collection,
+		not_in_booster = v.not_in_booster
 	})
 	elementcattos.compounds[v.id] = {v.formula, j.key}
+end
+
+return function(t)
+	legitimate = t.legitimate
 end
